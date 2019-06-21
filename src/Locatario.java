@@ -35,21 +35,4 @@ public class Locatario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-
-    // varificação dos dados para cadastro de locatario
-    public boolean validaLocatario(Locatario l) {
-        if ((l.getMatricula().length() < 4) || (l.getSenha().length() < 4) || (l.getCategoria().length() == 0)
-                || (l.getCategoria().length() < 4)) {
-
-            // evitar cadastro com matricula igual
-            for (int i = 0; i < locatarios.size(); i++) {
-                if (locatarios.get(i).getMatricula().equals(l.getMatricula())) {
-                    return false;
-                }
-            }
-            return false;
-        } else {
-            return true;
-        }
-    }
 }
