@@ -1,6 +1,5 @@
 language: java
-
 jdk:
-  - oraclejdk11
-  - openjdk10
-  - openjdk11
+  - oraclejdk8
+
+script: ant build
