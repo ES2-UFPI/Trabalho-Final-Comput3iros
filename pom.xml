@@ -59,7 +59,7 @@
      <appendAssemblyId>false</appendAssemblyId>
      <archive>
       <manifest>
-       <mainClass>Main<mainClass>
+       <mainClass>Main</mainClass>
       </manifest>
      </archive>
     </configuration>
