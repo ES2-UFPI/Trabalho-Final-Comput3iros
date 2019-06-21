@@ -6,9 +6,9 @@ public class Locadora {
     public void cadastrarLocatario(Locatario l) {
         if (l.validaLocatario(l) == true) {
             locatarios.add(l);
-            System.out.println("\nLocatario cadastrado com sucesso.");
+            System.out.println("\nLocatario cadastrado com sucesso.\n");
         } else {
-            System.out.println("\nNão foi possivel cadastrar locatario.");
+            System.out.println("\nNão foi possivel cadastrar locatario.\n");
         }
     }
 }
