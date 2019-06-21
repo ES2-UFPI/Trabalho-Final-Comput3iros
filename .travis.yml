@@ -1,5 +1,8 @@
 language: java
-jdk:
-  - oraclejdk11
 
-script: ant build
+script:
+ - mvn test
+ - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+
+jdk:
+ - oraclejdk9
