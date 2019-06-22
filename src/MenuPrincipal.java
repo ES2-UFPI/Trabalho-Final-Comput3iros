@@ -1,8 +1,8 @@
 import java.util.Scanner;
+import SubMenuCadastro;
 
 public class MenuPrincipal {
-
-    // menu principal
+    // Menu principal
     public void menu() {
 
         System.out.println("\n\n### Locadora - Sistema de Empréstimos e Devoluções ###");
@@ -27,19 +27,20 @@ public class MenuPrincipal {
         }
 
         switch (opcao) {
-        case 1:
+        case 1: // Chamar submenu Cadastro
+            SubMenuCadastro.menuCadastro();
             break;
-        case 2:
+        case 2: // Cadastrar emprestimo
             break;
-        case 3:
+        case 3: // Cadastrar devolucao
             break;
-        case 4:
+        case 4: // Cadastrar relatorio
             break;
-        case 5:
+        case 5: // Pesquisar
             break;
-        case 6:
+        case 6: // Alterar Configuracao
             break;
-        case 0:
+        case 0: // Sair
             break;
         default:
             System.out.println("Opção Inválida!");
