@@ -1,3 +1,5 @@
+import java.util.Date;
+
 public class Emprestimo {
     private Exemplar exemplar;
     private Locatario locatario;
@@ -29,7 +31,7 @@ public class Emprestimo {
         this.dataDevol = dataDevol;
     }
     public boolean isDevolvido() {
-        return devol;
+        return isDevolvido;
     }
     public void setDevolvido(boolean devol) {
         this.isDevolvido = devol;
