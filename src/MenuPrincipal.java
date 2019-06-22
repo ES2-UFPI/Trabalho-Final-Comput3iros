@@ -1,12 +1,11 @@
 import java.util.Scanner;
-import SubMenuCadastro.menuCadastro;
 
 public class MenuPrincipal {
     // Menu principal
     public void menu() {
 
-        System.out.println("\n\n### Locadora - Sistema de Empréstimos e Devoluções ###");
-        System.out.println("\n                ===================================");
+        System.out.println("\n        ### Locadora - Sistema de Empréstimos e Devoluções ###");
+        System.out.println("\n                  ===================================");
         System.out.println("                  |     1 - Cadastro                |");
         System.out.println("                  |     2 - Empréstimo              |");
         System.out.println("                  |     3 - Devolução               |");
@@ -17,11 +16,11 @@ public class MenuPrincipal {
         System.out.println("                  ===================================\n");
 
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Opção ->  ");
+        System.out.print("                  Opção ->  ");
         int opcao = scanner.nextInt();
 
         while (opcao < 0 || opcao > 6) {
-            System.out.print("Opção ->  ");
+            System.out.print("                  Opção ->  ");
             opcao = scanner.nextInt();
             scanner.close();
         }
