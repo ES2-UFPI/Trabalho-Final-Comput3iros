@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class SubMenuConfiguracao {
-    public static void menuConfiguracao(){
+    public static void menuConfiguracao() {
         System.out.println("\n       ### Locadora - Sistema de Empréstimos e Devoluções ###");
         System.out.println("\n                  ===================================");
         System.out.println("                  |             Configuracao         |");
@@ -25,19 +25,19 @@ public class SubMenuConfiguracao {
         }
 
         switch (opcao) {
-            case 1: // Cadastro de Locatario
-                break;
-            case 2: // Cadastro de Exemplar
-                break;
-            case 3: // Cadastro de Configuracao
-                break;
-            case 4: // Cadastro de Configuracao
-                break;                
-            case 0: // Sair
-                break;
-            default:
-                System.out.println("Opção Inválida!");
-                break;
-            }
+        case 1: // Alterar multa
+            break;
+        case 2: // Alterar quantidade de dias para professor
+            break;
+        case 3: // Alterar quantidade de dias para aluno
+            break;
+        case 4: // Alterar quantidade de dias para tecnico
+            break;
+        case 0: // Sair
+            break;
+        default:
+            System.out.println("Opção Inválida!");
+            break;
+        }
     }
 }
