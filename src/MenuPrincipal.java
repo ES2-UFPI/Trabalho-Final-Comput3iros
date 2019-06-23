@@ -1,5 +1,3 @@
-package functions;
-
 import java.util.Scanner;
 
 public class MenuPrincipal {
@@ -39,8 +37,9 @@ public class MenuPrincipal {
             break;
         case 5: // Pesquisar
             break;
-        case 6: SubMenuConfiguracao.menuConfiguracao();
-        // Alterar Configuracao
+        case 6:
+            SubMenuConfiguracao.menuConfiguracao();
+            // Alterar Configuracao
             break;
         case 0: // Sair
             break;

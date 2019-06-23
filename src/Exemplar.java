@@ -1,5 +1,3 @@
-package functions;
-
 public class Exemplar{
     private String codigo;
     private int quantidade;
