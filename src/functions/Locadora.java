@@ -6,6 +6,7 @@ import java.util.Date;
 public class Locadora {
     private ArrayList<Locatario> locatarios = new ArrayList<Locatario>();
     private ArrayList<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
+    private ArrayList<Exemplar> exemplares = new ArrayList<Exemplar>();
 
     public void cadastrarLocatario(Locatario l) {
         if (validaLocatario(l) == true) {
@@ -33,6 +34,17 @@ public class Locadora {
         }
     }
 
+    public Locatario pesquisarLocatario(String matricula) {
+        for (Locatario l : this.locatarios) {
+            if (l.getMatricula() == matricula) {
+                System.out.println("Locatario retornado: " + l.getNome());
+                return l;
+            }
+        }
+        System.out.println("Nao encontrado");
+        return null;
+    }
+
     public ArrayList<Locatario> getLocatarios() {
         return this.locatarios;
     }
@@ -43,7 +55,7 @@ public class Locadora {
 
     // Caso não seja possível realizar o empréstimo por todos os exemplares do
     // estoque estarem emprestados, então é retornado null.
-    public Emprestimo emprestar(Locatario l, Exemplar ex, Date dtEmp) {
+    public Emprestimo realizarEmprestimo(String matricula, String codigoEx, Date dtEmp) {
         if (!(quantidadeEmprestada(ex) < ex.getQuantidade())) {
             return null;
         }
