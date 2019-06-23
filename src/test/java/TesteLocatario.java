@@ -3,8 +3,7 @@ package test;
 import org.junit.Test;
 import static org.hamcrest.CoreMatchers.equalTo;
 
-import funcionalidades.Locatario;
-import funcionalidades.Locadora;
+import functions.*;
 
 public class TesteLocatario {
 
