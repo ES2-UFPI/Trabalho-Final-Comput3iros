@@ -43,7 +43,7 @@ public class Locadora {
         return null;
     }
 
-    public Locatario pesquisarExemplar(String codigo) {
+    public Exemplar pesquisarExemplar(String codigo) {
         for (Exemplar e : this.exemplares) {
             if (e.getCodigo() == codigo) {
                 return e;
@@ -62,9 +62,9 @@ public class Locadora {
 
     // Caso não seja possível realizar o empréstimo por todos os exemplares do
     // estoque estarem emprestados, então é retornado null.
-    public Emprestimo realizarEmprestimo(String matricula, String codigoEx, Date dtEmp) {
+    public Emprestimo realizarEmprestimo(String matricula, String codigoEx) {
         Locatario l = this.pesquisarLocatario(matricula);
-        Exemplar e = this.pesquisarExemplar(codigo);
+        Exemplar e = this.pesquisarExemplar(codigoEx);
 
         if (l == null) {
             System.out.println("Locatario nao encontrado");
@@ -82,15 +82,14 @@ public class Locadora {
 
         int quantDias = 0;
 
-        long milisegundosEmUmDia = 86400000;
-        Date dtDevol = new Date(dtEmp.getTime() + quantDias * milisegundosEmUmDia);
+        Date dtEmprestimo = new Date();
 
-        Emprestimo emp = new Emprestimo();
-        emp.setLocatario(l);
-        emp.setExemplar(ex);
-        emp.setDataEmp(dtEmp);
-        emp.setDataDevol(dtDevol);
+        long milisegundosEmUmDia = 86400000;
+        Date dtDevol = new Date(dtEmprestimo.getTime() + quantDias * milisegundosEmUmDia);
+
+        Emprestimo emp = new Emprestimo(e, l, dtEmprestimo, dtDevol);
         addEmprestimo(emp);
+
         return emp;
     }
 
