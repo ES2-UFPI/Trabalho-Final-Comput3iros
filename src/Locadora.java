@@ -17,6 +17,74 @@ public class Locadora {
         }
     }
 
+    // Cadastrar Livro
+    public void cadastrarExemplar(String codigo, String titulo, String autor, int quantidade, String volume,
+            int numPaginas) {
+        if (codigo.equals("")) {
+            return;
+        }
+        if (titulo.equals("")) {
+            return;
+        }
+        if (autor.equals("")) {
+            return;
+        }
+        if (quantidade < 1) {
+            return;
+        }
+        if (volume.equals("")) {
+            return;
+        }
+        if (numPaginas < 1) {
+            return;
+        }
+
+        Exemplar e = this.pesquisarExemplar(codigo);
+
+        if (e != null) {
+            System.out.println("Livrp ja existente");
+            return;
+        }
+
+        Livro l = new Livro(codigo, quantidade, titulo, autor, volume, numPaginas);
+
+        this.exemplares.add(l);
+
+        System.out.println("Livro " + l.getTitulo() + " adicionado a Locadora!");
+    }
+
+    // Cadastrar Artigo
+    public void cadastrarExemplar(String codigo, String titulo, String autor, int quantidade, String revista) {
+        if (codigo.equals("")) {
+            return;
+        }
+        if (titulo.equals("")) {
+            return;
+        }
+        if (autor.equals("")) {
+            return;
+        }
+        if (quantidade < 1) {
+            return;
+        }
+        if (revista.equals("")) {
+            return;
+        }
+
+        Exemplar e = this.pesquisarExemplar(codigo);
+
+        if (e != null) {
+            System.out.println("Artigo ja existente");
+            return;
+        }
+
+        Artigo a = new Artigo(codigo, quantidade, titulo, autor, revista);
+
+        this.exemplares.add(a);
+
+        System.out.println("Artigo " + a.getTitulo() + " adicionado a Locadora!");
+    }
+
     // varificação dos dados para cadastro de locatario
     public boolean validaLocatario(Locatario l) {
         if ((l.getMatricula().length() < 4) || (l.getSenha().length() < 4) || (l.getCategoria().length() == 0)

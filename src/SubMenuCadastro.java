@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class SubMenuCadastro {
-    public static void menuCadastro() {
+    public static void menuCadastro(Locadora l) {
         System.out.println("\n       ### Locadora - Sistema de Empréstimos e Devoluções ###");
         System.out.println("\n                  ===================================");
         System.out.println("                  |             Cadastro            |");
@@ -27,7 +27,7 @@ public class SubMenuCadastro {
         case 1: // Cadastro de Locatario
             break;
         case 2: // Cadastro de Exemplar
-            SubMenuExemplar.menuExemplar();
+            SubMenuExemplar.menuExemplar(l);
             break;
         case 3: // Cadastro de Configuracao
             break;

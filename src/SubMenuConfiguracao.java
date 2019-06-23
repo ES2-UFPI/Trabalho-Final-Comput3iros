@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class SubMenuConfiguracao {
-    public static void menuConfiguracao() {
+    public static void menuConfiguracao(Locadora l) {
         System.out.println("\n       ### Locadora - Sistema de Empréstimos e Devoluções ###");
         System.out.println("\n                  ===================================");
         System.out.println("                  |          Configuracao           |");
