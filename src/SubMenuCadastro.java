@@ -3,10 +3,9 @@ import java.util.Scanner;
 public class SubMenuCadastro {
     public static void menuCadastro(Locadora l) {
         int opcao;
+        Scanner scanner = new Scanner(System.in);
 
         do {
-            Scanner scanner = new Scanner(System.in);
-
             System.out.println("\n       ### Locadora - Sistema de Empréstimos e Devoluções ###");
             System.out.println("\n                  ===================================");
             System.out.println("                  |             Cadastro            |");
@@ -35,7 +34,7 @@ public class SubMenuCadastro {
             case 3: // Cadastro de Configuracao
                 break;
             case 0: // Sair
-                // scanner.close();
+                scanner.close();
                 break;
             default:
                 System.out.println("Opção Inválida!");
