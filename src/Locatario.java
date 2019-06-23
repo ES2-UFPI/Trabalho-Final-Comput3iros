@@ -1,5 +1,3 @@
-package functions;
-
 public class Locatario {
     private String matricula;
     private String nome;

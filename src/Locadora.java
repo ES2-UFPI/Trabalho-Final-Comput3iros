@@ -1,5 +1,3 @@
-package functions;
-
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -62,7 +60,8 @@ public class Locadora {
         emprestimos.add(em);
     }
 
-    // método para calcular o valor da Multa dependendo da categoria
+    // Metodo para calcular o valor da Multa dependendo da categoria
+    @SuppressWarnings("deprecation")
     public static double calculaMulta(Date dataDev, Date dataEmp, String categoria) {
         long milisegundosEmUmDia = 86400000;
         int dias_passados = dataDev.getDay() - dataEmp.getDay(); // dataDevolução - dataEmprestimo = dias que passaram
