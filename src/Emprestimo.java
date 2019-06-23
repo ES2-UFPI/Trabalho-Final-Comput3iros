@@ -40,7 +40,7 @@ public class Emprestimo {
     }
 
     public boolean isDevolvido() {
-        return devol;
+        return isDevolvido;
     }
 
     public void setDevolvido(boolean devol) {
