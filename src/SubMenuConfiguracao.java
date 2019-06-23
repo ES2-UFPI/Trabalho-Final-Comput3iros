@@ -4,7 +4,7 @@ public class SubMenuConfiguracao {
     public static void menuConfiguracao() {
         System.out.println("\n       ### Locadora - Sistema de Empréstimos e Devoluções ###");
         System.out.println("\n                  ===================================");
-        System.out.println("                  |             Configuracao         |");
+        System.out.println("                  |          Configuracao           |");
         System.out.println("                  ===================================");
         System.out.println("                  |                                 |");
         System.out.println("                  |     1 - Alterar multa           |");
