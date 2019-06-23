@@ -37,11 +37,18 @@ public class Locadora {
     public Locatario pesquisarLocatario(String matricula) {
         for (Locatario l : this.locatarios) {
             if (l.getMatricula() == matricula) {
-                System.out.println("Locatario retornado: " + l.getNome());
                 return l;
             }
         }
-        System.out.println("Nao encontrado");
+        return null;
+    }
+
+    public Locatario pesquisarExemplar(String codigo) {
+        for (Exemplar e : this.exemplares) {
+            if (e.getCodigo() == codigo) {
+                return e;
+            }
+        }
         return null;
     }
 
@@ -56,7 +63,20 @@ public class Locadora {
     // Caso não seja possível realizar o empréstimo por todos os exemplares do
     // estoque estarem emprestados, então é retornado null.
     public Emprestimo realizarEmprestimo(String matricula, String codigoEx, Date dtEmp) {
-        if (!(quantidadeEmprestada(ex) < ex.getQuantidade())) {
+        Locatario l = this.pesquisarLocatario(matricula);
+        Exemplar e = this.pesquisarExemplar(codigo);
+
+        if (l == null) {
+            System.out.println("Locatario nao encontrado");
+            return null;
+        }
+        if (e == null) {
+            System.out.println("Exemplar nao encontrado");
+            return null;
+        }
+
+        if (!(quantidadeEmprestada(e) < e.getQuantidade())) {// Quantidade emprestada eh menor que a quantidade
+                                                             // disponivel
             return null;
         }
 
@@ -64,6 +84,7 @@ public class Locadora {
 
         long milisegundosEmUmDia = 86400000;
         Date dtDevol = new Date(dtEmp.getTime() + quantDias * milisegundosEmUmDia);
+
         Emprestimo emp = new Emprestimo();
         emp.setLocatario(l);
         emp.setExemplar(ex);
