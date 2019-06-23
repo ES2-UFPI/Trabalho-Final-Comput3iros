@@ -30,4 +30,8 @@ public class Locadora {
             return true;
         }
     }
+
+    public ArrayList<Locatario> getLocatarios(){
+        return this.locatarios;
+    }
 }

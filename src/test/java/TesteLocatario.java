@@ -20,10 +20,10 @@ public class TesteLocatario {
 
         System.out.println("Rodando teste locatario...");
         locadora.cadastrarLocatario(locatario);
-        assertEquals("Mateus", locadora.locatarios.get(0).getNome());
-        assertEquals("123456", locadora.locatarios.get(0).getMatricula());
-        assertEquals("tito123", locadora.locatarios.get(0).getSenha());
-        assertEquals("aluno", locadora.locatarios.get(0).getCategoria());
+        assertEquals("Mateus", locadora.getLocatarios().get(0).getNome());
+        assertEquals("123456", locadora.getLocatarios().get(0).getMatricula());
+        assertEquals("tito123", locadora.getLocatarios().get(0).getSenha());
+        assertEquals("aluno", locadora.getLocatarios().get(0).getCategoria());
 
         // testando outro locatario ...
 
@@ -35,9 +35,9 @@ public class TesteLocatario {
 
         System.out.println("Rodando teste locatario 2...");
         locadora.cadastrarLocatario(locatario2);
-        assertEquals("Tito", locadora.locatarios.get(1).getNome());
-        assertEquals("010101", locadora.locatarios.get(1).getMatricula());
-        assertEquals("mtb000111", locadora.locatarios.get(1).getSenha());
-        assertEquals("aluno", locadora.locatarios.get(1).getCategoria());
+        assertEquals("Tito", locadora.getLocatarios().get(1).getNome());
+        assertEquals("010101", locadora.getLocatarios().get(1).getMatricula());
+        assertEquals("mtb000111", locadora.getLocatarios().get(1).getSenha());
+        assertEquals("aluno", locadora.getLocatarios().get(1).getCategoria());
     }
 }
