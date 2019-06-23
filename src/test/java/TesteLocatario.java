@@ -1,10 +1,10 @@
-package test.java;
+package test;
 
 import org.junit.Test;
 import static org.hamcrest.CoreMatchers.equalTo;
 
-import src.Locatario;
-import src.Locadora;
+import funcionalidades.Locatario;
+import funcionalidades.Locadora;
 
 public class TesteLocatario {
 
