@@ -2,8 +2,8 @@ package functions;
 
 import java.util.Scanner;
 
-public class SubMenuCadastro {
-    public static void menuCadastro(){
+public class SubMenuConfiguracao {
+    public static void menuConfiguracao(){
         System.out.println("\n       ### Locadora - Sistema de Empréstimos e Devoluções ###");
         System.out.println("\n                  ===================================");
         System.out.println("                  |             Configuracao         |");
