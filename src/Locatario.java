@@ -4,6 +4,13 @@ public class Locatario {
     private String categoria;
     private String senha;
 
+    public Locatario(String matricula, String nome, String categoria, String senha) {
+        this.matricula = matricula;
+        this.nome = nome;
+        this.categoria = categoria;
+        this.senha = senha;
+    }
+
     public String getMatricula() {
         return matricula;
     }

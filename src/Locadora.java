@@ -8,30 +8,93 @@ public class Locadora {
 
     public static Configuracao config;
 
-    public void cadastrarLocatario(Locatario l) {
-        if (validaLocatario(l) == true) {
-            locatarios.add(l);
-            System.out.println("\nLocatario cadastrado com sucesso.\n");
-        } else {
-            System.out.println("\nNão foi possivel cadastrar locatario.\n");
+    public void cadastrarLocatario(String matricula, String nome, String categoria, String senha) {
+        if (matricula.equals("")) {
+            return;
         }
+        if (nome.equals("")) {
+            return;
+        }
+        if (categoria.equals("")) {
+            return;
+        }
+        if (senha.equals("")) {
+            return;
+        }
+
+        Locatario l = new Locatario(matricula, nome, categoria, senha);
+
+        this.locatarios.add(l);
+
+        System.out.println("Locatario " + l.getNome() + " adicionado!");
     }
 
-    // varificação dos dados para cadastro de locatario
-    public boolean validaLocatario(Locatario l) {
-        if ((l.getMatricula().length() < 4) || (l.getSenha().length() < 4) || (l.getCategoria().length() == 0)
-                || (l.getCategoria().length() < 4)) {
-
-            // evitar cadastro com matricula igual
-            for (int i = 0; i < locatarios.size(); i++) {
-                if (locatarios.get(i).getMatricula().equals(l.getMatricula())) {
-                    return false;
-                }
-            }
-            return false;
-        } else {
-            return true;
+    // Cadastrar Livro
+    public void cadastrarExemplar(String codigo, String titulo, String autor, int quantidade, String volume,
+            int numPaginas) {
+        if (codigo.equals("")) {
+            return;
         }
+        if (titulo.equals("")) {
+            return;
+        }
+        if (autor.equals("")) {
+            return;
+        }
+        if (quantidade < 1) {
+            return;
+        }
+        if (volume.equals("")) {
+            return;
+        }
+        if (numPaginas < 1) {
+            return;
+        }
+
+        Exemplar e = this.pesquisarExemplar(codigo);
+
+        if (e != null) {
+            System.out.println("Livrp ja existente");
+            return;
+        }
+
+        Livro l = new Livro(codigo, quantidade, titulo, autor, volume, numPaginas);
+
+        this.exemplares.add(l);
+
+        System.out.println("Livro " + l.getTitulo() + " adicionado a Locadora!");
+    }
+
+    // Cadastrar Artigo
+    public void cadastrarExemplar(String codigo, String titulo, String autor, int quantidade, String revista) {
+        if (codigo.equals("")) {
+            return;
+        }
+        if (titulo.equals("")) {
+            return;
+        }
+        if (autor.equals("")) {
+            return;
+        }
+        if (quantidade < 1) {
+            return;
+        }
+        if (revista.equals("")) {
+            return;
+        }
+
+        Exemplar e = this.pesquisarExemplar(codigo);
+
+        if (e != null) {
+            System.out.println("Artigo ja existente");
+            return;
+        }
+
+        Artigo a = new Artigo(codigo, quantidade, titulo, autor, revista);
+
+        this.exemplares.add(a);
+
+        System.out.println("Artigo " + a.getTitulo() + " adicionado a Locadora!");
     }
 
     public Locatario pesquisarLocatario(String matricula) {
