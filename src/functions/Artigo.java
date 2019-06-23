@@ -1,3 +1,5 @@
+package functions;
+
 public class Artigo extends Exemplar {
     private String revista;
 

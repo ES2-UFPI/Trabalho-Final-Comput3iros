@@ -1,3 +1,5 @@
+package functions;
+
 import java.util.ArrayList;
 
 public class Locadora {
@@ -27,5 +29,9 @@ public class Locadora {
         } else {
             return true;
         }
+    }
+
+    public ArrayList<Locatario> getLocatarios(){
+        return this.locatarios;
     }
 }
