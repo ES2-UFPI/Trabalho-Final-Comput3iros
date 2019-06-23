@@ -73,8 +73,7 @@ public class Locadora {
                 int dias_multa = dias_passados - dias_permitidos;
                 double multa = config.getMulta() * dias_multa;
                 return multa;
-            } 
-            else {
+            } else {
                 double multa = 0;
                 System.out.println("\nNao teve nenhum valor de multas.");
                 return multa;
@@ -87,8 +86,7 @@ public class Locadora {
                 int dias_multa = dias_passados - dias_permitidos;
                 double multa = config.getMulta() * dias_multa;
                 return multa;
-            } 
-            else {
+            } else {
                 double multa = 0;
                 System.out.println("\nNao teve nenhum valor de multas.");
                 return multa;
@@ -101,8 +99,7 @@ public class Locadora {
                 int dias_multa = dias_passados - dias_permitidos;
                 double multa = config.getMulta() * dias_multa;
                 return multa;
-            } 
-            else {
+            } else {
                 double multa = 0;
                 System.out.println("\nNao teve nenhum valor de multas.");
                 return multa;
@@ -137,6 +134,9 @@ public class Locadora {
 
         long milisegundosEmUmDia = 86400000;
         Date dtDevol = new Date(dtEmprestimo.getTime() + (quantDias * milisegundosEmUmDia));
+
+        // multa refente ao emprestimo sendo calculada
+        double multa = calculaMulta(dtDevol, dtEmprestimo, l.getCategoria());
 
         Emprestimo emp = new Emprestimo(e, l, dtEmprestimo, dtDevol);
         addEmprestimo(emp);
