@@ -17,18 +17,17 @@ public class SubMenuExemplar {
             System.out.println("                  |     0 - Sair                    |");
             System.out.println("                  ===================================\n");
 
-            Scanner scanner = new Scanner(System.in);
             System.out.print("                  Opção ->  ");
-            opcao = scanner.nextInt();
+            opcao = in.nextInt();
 
             while (opcao < 0 || opcao > 2) {
                 System.out.print("                  Opção ->  ");
-                opcao = scanner.nextInt();
-                scanner.close();
+                opcao = in.nextInt();
             }
 
             switch (opcao) {
             case 1: // Cadastro de Livro
+                in.nextLine();
                 System.out.println("    -> Codigo: ");
                 String codigo = in.nextLine();
                 System.out.println("    -> Titulo: ");
@@ -46,6 +45,7 @@ public class SubMenuExemplar {
 
                 break;
             case 2: // Cadastro de Artigo
+                in.nextLine();
                 System.out.println("    -> Codigo: ");
                 codigo = in.nextLine();
                 System.out.println("    -> Titulo: ");
@@ -61,6 +61,7 @@ public class SubMenuExemplar {
 
                 break;
             case 0: // Sair
+                in.nextLine();
                 in.close();
                 break;
             default:

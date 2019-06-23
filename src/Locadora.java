@@ -8,13 +8,25 @@ public class Locadora {
 
     public static Configuracao config;
 
-    public void cadastrarLocatario(Locatario l) {
-        if (validaLocatario(l) == true) {
-            locatarios.add(l);
-            System.out.println("\nLocatario cadastrado com sucesso.\n");
-        } else {
-            System.out.println("\nNão foi possivel cadastrar locatario.\n");
+    public void cadastrarLocatario(String matricula, String nome, String categoria, String senha) {
+        if (matricula.equals("")) {
+            return;
         }
+        if (nome.equals("")) {
+            return;
+        }
+        if (categoria.equals("")) {
+            return;
+        }
+        if (senha.equals("")) {
+            return;
+        }
+
+        Locatario l = new Locatario(matricula, nome, categoria, senha);
+
+        this.locatarios.add(l);
+
+        System.out.println("Locatario " + l.getNome() + " adicionado!");
     }
 
     // Cadastrar Livro
@@ -83,23 +95,6 @@ public class Locadora {
         this.exemplares.add(a);
 
         System.out.println("Artigo " + a.getTitulo() + " adicionado a Locadora!");
-    }
-
-    // varificação dos dados para cadastro de locatario
-    public boolean validaLocatario(Locatario l) {
-        if ((l.getMatricula().length() < 4) || (l.getSenha().length() < 4) || (l.getCategoria().length() == 0)
-                || (l.getCategoria().length() < 4)) {
-
-            // evitar cadastro com matricula igual
-            for (int i = 0; i < locatarios.size(); i++) {
-                if (locatarios.get(i).getMatricula().equals(l.getMatricula())) {
-                    return false;
-                }
-            }
-            return false;
-        } else {
-            return true;
-        }
     }
 
     public Locatario pesquisarLocatario(String matricula) {

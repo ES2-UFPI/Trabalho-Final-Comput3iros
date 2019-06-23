@@ -5,7 +5,7 @@ public class MenuPrincipal {
     public void menu(Locadora l) {
         int opcao;
         do {
-            Scanner scanner = new Scanner(System.in);
+            Scanner in = new Scanner(System.in);
 
             System.out.println("\n        ### Locadora - Sistema de Empréstimos e Devoluções ###");
             System.out.println("\n                  ===================================");
@@ -19,11 +19,11 @@ public class MenuPrincipal {
             System.out.println("                  ===================================\n");
 
             System.out.print("                  Opção ->  ");
-            opcao = scanner.nextInt();
+            opcao = in.nextInt();
 
             while (opcao < 0 || opcao > 6) {
                 System.out.print("                  Opção ->  ");
-                opcao = scanner.nextInt();
+                opcao = in.nextInt();
             }
 
             switch (opcao) {
@@ -43,7 +43,7 @@ public class MenuPrincipal {
                 // Alterar Configuracao
                 break;
             case 0: // Sair
-                // scanner.close();
+                in.close();
                 break;
             default:
                 System.out.println("Opção Inválida!");
