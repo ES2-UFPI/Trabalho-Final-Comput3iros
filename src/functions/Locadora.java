@@ -1,9 +1,11 @@
 package functions;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Locadora {
     private ArrayList<Locatario> locatarios = new ArrayList<Locatario>();
+    private ArrayList<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
 
     public void cadastrarLocatario(Locatario l) {
         if (validaLocatario(l) == true) {
@@ -31,7 +33,47 @@ public class Locadora {
         }
     }
 
-    public ArrayList<Locatario> getLocatarios(){
+    public ArrayList<Locatario> getLocatarios() {
         return this.locatarios;
+    }
+
+    public void addEmprestimo(Emprestimo em) {
+        emprestimos.add(em);
+    }
+
+    // Caso não seja possível realizar o empréstimo por todos os exemplares do
+    // estoque estarem emprestados, então é retornado null.
+    public Emprestimo emprestar(Locatario l, Exemplar ex, Date dtEmp) {
+        if (!(quantidadeEmprestada(ex) < ex.getQuantidade())) {
+            return null;
+        }
+
+        int quantDias = 0;
+
+        long milisegundosEmUmDia = 86400000;
+        Date dtDevol = new Date(dtEmp.getTime() + quantDias * milisegundosEmUmDia);
+        Emprestimo emp = new Emprestimo();
+        emp.setLocatario(l);
+        emp.setExemplar(ex);
+        emp.setDataEmp(dtEmp);
+        emp.setDataDevol(dtDevol);
+        addEmprestimo(emp);
+        return emp;
+    }
+
+    private int quantidadeEmprestada(Exemplar ex) {
+        int cont = 0;
+
+        for (Emprestimo emp : emprestimos) {
+            if (emp.getExemplar().getCodigo() == ex.getCodigo() && emp.isDevolvido() == false) {
+                cont++;
+            }
+        }
+
+        return cont;
+    }
+
+    public void isDevolvido(Emprestimo em) {
+        em.setDevolvido(true);
     }
 }
