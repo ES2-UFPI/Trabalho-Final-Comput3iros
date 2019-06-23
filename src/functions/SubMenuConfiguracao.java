@@ -33,6 +33,8 @@ public class SubMenuConfiguracao {
                 break;
             case 3: // Cadastro de Configuracao
                 break;
+            case 4: // Cadastro de Configuracao
+                break;                
             case 0: // Sair
                 break;
             default:
