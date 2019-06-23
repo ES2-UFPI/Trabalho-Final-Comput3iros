@@ -1,15 +1,15 @@
 import java.util.Scanner;
 
-public class SubMenuCadastro {
-    public static void menuCadastro() {
+public class SubMenuExemplar {
+    public static void menuExemplar() {
         System.out.println("\n       ### Locadora - Sistema de Empréstimos e Devoluções ###");
         System.out.println("\n                  ===================================");
-        System.out.println("                  |             Cadastro            |");
+        System.out.println("                  |             Exemplar            |");
         System.out.println("                  ===================================");
         System.out.println("                  |                                 |");
-        System.out.println("                  |     1 - Locatário               |");
-        System.out.println("                  |     2 - Exemplar                |");
-        System.out.println("                  |     3 - Configuração            |");
+        System.out.println("                  |     1 - Livro                   |");
+        System.out.println("                  |     2 - Artigo                  |");
+        System.out.println("                  |                                 |");
         System.out.println("                  |     0 - Sair                    |");
         System.out.println("                  ===================================\n");
 
@@ -24,12 +24,9 @@ public class SubMenuCadastro {
         }
 
         switch (opcao) {
-        case 1: // Cadastro de Locatario
+        case 1: // Cadastro de Livro
             break;
-        case 2: // Cadastro de Exemplar
-            SubMenuExemplar.menuExemplar();
-            break;
-        case 3: // Cadastro de Configuracao
+        case 2: // Cadastro de Artigo
             break;
         case 0: // Sair
             break;
