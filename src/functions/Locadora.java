@@ -8,6 +8,8 @@ public class Locadora {
     private ArrayList<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
     private ArrayList<Exemplar> exemplares = new ArrayList<Exemplar>();
 
+    public static Configuracao config;
+
     public void cadastrarLocatario(Locatario l) {
         if (validaLocatario(l) == true) {
             locatarios.add(l);
@@ -60,6 +62,55 @@ public class Locadora {
         emprestimos.add(em);
     }
 
+    // método para calcular o valor da Multa dependendo da categoria
+    public static double calculaMulta(Date dataDev, Date dataEmp, String categoria) {
+        long milisegundosEmUmDia = 86400000;
+        int dias_passados = dataDev.getDay() - dataEmp.getDay(); // dataDevolução - dataEmprestimo = dias que passaram
+
+        if (categoria == "aluno") {
+            int dias_permitidos = config.getDiasAluno();
+            if (dias_passados > dias_permitidos) {
+                int dias_multa = dias_passados - dias_permitidos;
+                double multa = config.getMulta() * dias_multa;
+                return multa;
+            } 
+            else {
+                double multa = 0;
+                System.out.println("\nNao teve nenhum valor de multas.");
+                return multa;
+            }
+        }
+
+        if (categoria == "professor") {
+            int dias_permitidos = config.getDiasProf();
+            if (dias_passados > dias_permitidos) {
+                int dias_multa = dias_passados - dias_permitidos;
+                double multa = config.getMulta() * dias_multa;
+                return multa;
+            } 
+            else {
+                double multa = 0;
+                System.out.println("\nNao teve nenhum valor de multas.");
+                return multa;
+            }
+        }
+
+        if (categoria == "tecnico") {
+            int dias_permitidos = config.getDiasTec();
+            if (dias_passados > dias_permitidos) {
+                int dias_multa = dias_passados - dias_permitidos;
+                double multa = config.getMulta() * dias_multa;
+                return multa;
+            } 
+            else {
+                double multa = 0;
+                System.out.println("\nNao teve nenhum valor de multas.");
+                return multa;
+            }
+        }
+        return 0;
+    }
+
     // Caso não seja possível realizar o empréstimo por todos os exemplares do
     // estoque estarem emprestados, então é retornado null.
     public Emprestimo realizarEmprestimo(String matricula, String codigoEx) {
@@ -85,7 +136,7 @@ public class Locadora {
         Date dtEmprestimo = new Date();
 
         long milisegundosEmUmDia = 86400000;
-        Date dtDevol = new Date(dtEmprestimo.getTime() + quantDias * milisegundosEmUmDia);
+        Date dtDevol = new Date(dtEmprestimo.getTime() + (quantDias * milisegundosEmUmDia));
 
         Emprestimo emp = new Emprestimo(e, l, dtEmprestimo, dtDevol);
         addEmprestimo(emp);
