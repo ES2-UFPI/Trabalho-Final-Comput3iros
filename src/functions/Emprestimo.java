@@ -9,6 +9,13 @@ public class Emprestimo {
     private Date dataDevol;
     private boolean isDevolvido;
 
+    public Emprestimo(Exemplar exemplar, Locatario locatario, Date dataEmp, Date dataDevol) {
+        this.exemplar = exemplar;
+        this.locatario = locatario;
+        this.dataEmp = dataEmp;
+        this.dataDevol = dataDevol;
+    }
+
     public Locatario getLocatario() {
         return locatario;
     }
