@@ -11,7 +11,7 @@ public class SubMenuCadastro {
         System.out.println("                  |                                 |");
         System.out.println("                  |     1 - Alterar multa           |");
         System.out.println("                  |     2 - Alterar dias professor  |");
-        System.out.println("                  |     3 - Configuração            |");
+        System.out.println("                  |     3 - Alterar dias aluno      |");
         System.out.println("                  |     0 - Sair                    |");
         System.out.println("                  ===================================\n");
 
