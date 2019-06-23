@@ -20,7 +20,7 @@ public class SubMenuConfiguracao {
         System.out.print("                  Opção ->  ");
         int opcao = scanner.nextInt();
 
-        while (opcao < 0 || opcao > 3) {
+        while (opcao < 0 || opcao > 4) {
             System.out.print("                  Opção ->  ");
             opcao = scanner.nextInt();
             scanner.close();
