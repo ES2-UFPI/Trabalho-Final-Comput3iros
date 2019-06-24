@@ -83,11 +83,11 @@ System.out.println("                  |     0 - Sair                    |");
 System.out.println("                  ===================================\n");
 System.out.println("\n       ### Locadora - Sistema de Empréstimos e Devoluções ###");
 System.out.println("\n                  ===================================");
-System.out.println("                  |          Configuracao           |");
-System.out.println("                  |          Configuracao           |");
-System.out.println("                  |          Configuracao           |");
-System.out.println("                  |          Configuracao           |");
-System.out.println("                  |          Configuracao           |");
-System.out.println("                  |          Configuracao           |");
-System.out.println("                  |          Configuracao           |");
+System.out.println("                  |         Teste          |");
+System.out.println("                  |         Teste          |");
+System.out.println("                  |         Teste          |");
+System.out.println("                  |         Teste          |");
+System.out.println("                  |         Teste          |");
+System.out.println("                  |         Teste          |");
+System.out.println("                  |         Teste          |");
 
