@@ -35,7 +35,7 @@ public class SubMenuConfiguracao {
                 break;
             case 4: 
                 break;
-            case 0: // Sair
+            case 0: 
                 break;
             default:
                 System.out.println("Opção Inválida!");
