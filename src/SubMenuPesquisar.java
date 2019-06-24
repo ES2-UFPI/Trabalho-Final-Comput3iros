@@ -23,13 +23,24 @@ public class SubMenuPesquisar {
             scanner.close();
         }
 
+        Locadora locadora = new Locadora();
+
         switch (opcao) {
         case 1: // Pesquisa Exemplar
+            System.out.println("\nDigite o código do Exemplar para pesquisa ->  ");
+            String codigo = scanner.nextLine();
+            locadora.pesquisarExemplar(codigo);
             break;
+
         case 2: // Pesquisa Locatario
+            System.out.println("\nDigite a matricula do Locatario para pesquisa ->  ");
+            String matricula = scanner.nextLine();
+            locadora.pesquisarLocatario(matricula);
             break;
+
         case 0: // Sair
             break;
+
         default:
             System.out.println("Opção Inválida!");
             break;
