@@ -314,4 +314,59 @@ public class Locadora {
 
         in.close();
     }
+
+    public void relatorioEmprestimosComAtraso() {
+        Scanner in = new Scanner(System.in);
+        int op = 0;
+
+        if (this.emprestimos.isEmpty()) {
+            System.out.println("\nNao ha emprestimos com atraso para exibir.\n");
+            in.close();
+            return;
+        }
+
+        System.out.println("-> Relatorio de emprestimos geral ou por Locatario? <1 ou 2> ");
+        do {
+            op = in.nextInt();
+        } while (op != 1 && op != 2);
+
+        ArrayList<Emprestimo> arrayEmprestimosAtrasados = new ArrayList<Emprestimo>(this.emprestimos);
+        arrayEmprestimosAtrasados.sort(Comparator.comparing(Emprestimo::getDataEmp));
+
+        if (op == 1) { // Geral
+            System.out.println("\n----------> Relatorio de todos os emprestimos atrasados <-------------\n");
+
+            for (Emprestimo e : arrayEmprestimosAtrasados) {
+                if (e.isAtrasado()) {
+                    System.out.println("Nome do locatario: " + e.getLocatario().getNome() + "\nLivro alugado: "
+                            + e.getExemplar().getTitulo() + "\nData do emprestimo: " + e.getDataEmp()
+                            + "\nData da devolucao: " + e.getDataDevol() + "\nMulta: R$ " + "\n\n");
+                }
+            }
+        } else if (op == 2) {
+            System.out.println("\n----------> Relatorio de emprestimos de um locatario <-------------\n");
+
+            System.out.print("Digite a matricula: ");
+            String matricula = in.nextLine();
+
+            Locatario l = this.pesquisarLocatario(matricula);
+
+            if (l == null) {
+                System.out.println("\nLocatario nao encontrado.\n");
+                in.close();
+                return;
+            }
+
+            System.out.println("    Locatario " + l.getNome() + ":\n");
+
+            for (Emprestimo e : arrayEmprestimosAtrasados) {
+                if (e.getLocatario().getMatricula() == l.getMatricula() && e.isAtrasado()) {
+                    System.out.println("\nLivro alugado: " + e.getExemplar().getTitulo() + "\nData do emprestimo: "
+                            + e.getDataEmp() + "\nData da devolucao: " + e.getDataDevol() + "\nMulta: R$ " + "\n\n");
+                }
+            }
+        }
+
+        in.close();
+    }
 }
