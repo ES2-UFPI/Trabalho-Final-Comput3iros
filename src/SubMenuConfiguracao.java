@@ -27,7 +27,7 @@ public class SubMenuConfiguracao {
             }
 
             switch (opcao) {
-            case 1: // Alterar multa
+            case 1: 
                 break;
             case 2: // Alterar quantidade de dias para professor
                 break;
