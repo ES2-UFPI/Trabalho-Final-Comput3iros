@@ -137,7 +137,7 @@ public class Locadora {
         long dias = dataDev.getTime() - dataEmp.getTime(); // dataDevolução - dataEmprestimo = dias que passaram
         long dias_passados = (dias / milisegundosEmUmDia); // ficar em dias
 
-        if (categoria == "aluno") {
+        if (categoria.equals("aluno")) {
             long dias_permitidos = config.getDiasAluno(); // vem dias como inteiro
             if (dias_passados > dias_permitidos) {
                 long dias_multa = dias_passados - dias_permitidos;
@@ -150,7 +150,7 @@ public class Locadora {
             }
         }
 
-        if (categoria == "professor") {
+        if (categoria.equals("professor")) {
             long dias_permitidos = config.getDiasProf(); // vem dias como inteiro
             if (dias_passados > dias_permitidos) {
                 long dias_multa = dias_passados - dias_permitidos;
@@ -163,7 +163,7 @@ public class Locadora {
             }
         }
 
-        if (categoria == "tecnico") {
+        if (categoria.equals("tecnico")) {
             long dias_permitidos = config.getDiasTec(); // vem dias como inteiro
             if (dias_passados > dias_permitidos) {
                 long dias_multa = dias_passados - dias_permitidos;
@@ -185,11 +185,11 @@ public class Locadora {
         Exemplar e = this.pesquisarExemplar(codigoEx);
 
         if (l == null) {
-            System.out.println("Locatario nao encontrado");
+            System.out.println("Locatario nao encontrado.");
             return null;
         }
         if (e == null) {
-            System.out.println("Exemplar nao encontrado");
+            System.out.println("Exemplar nao encontrado.");
             return null;
         }
 
