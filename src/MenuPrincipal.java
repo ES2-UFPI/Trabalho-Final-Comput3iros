@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class MenuPrincipal {
     // Menu principal
-    public void menu(Locadora l) {
+    public static void menu(Locadora l) {
         int opcao;
         do {
             Scanner in = new Scanner(System.in);
@@ -68,6 +68,7 @@ public class MenuPrincipal {
                 }
                 break;
             case 5: // Pesquisar
+                SubMenuPesquisar.menuPesquisar(l);
                 break;
             case 6:
                 SubMenuConfiguracao.menuConfiguracao(l);
