@@ -27,7 +27,7 @@ public class SubMenuConfiguracao {
             }
 
             switch (opcao) {
-            case 1: 
+            case 1: System.out.println(l.config.getMulta());
                 break;
             case 2: 
                 break;

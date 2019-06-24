@@ -8,7 +8,7 @@ public class Locadora {
     private ArrayList<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
     private ArrayList<Exemplar> exemplares = new ArrayList<Exemplar>();
 
-    public static Configuracao config;
+    public static Configuracao config=new Configuracao(2,7,10,12); // inicializando configuracao
 
     public void cadastrarLocatario(String matricula, String nome, String categoria, String senha) {
         if (matricula.equals("")) {
@@ -351,6 +351,8 @@ public class Locadora {
 
         in.close();
     }
+
+
 
     public void relatorioEmprestimosComAtraso() {
         if (this.emprestimos.isEmpty()) {
