@@ -199,7 +199,7 @@ public class Locadora {
             e.setQuantidade(e.getQuantidade() + 1);
         }
         if (e instanceof Artigo) {
-            System.out.println("\nLivro " + e.getTitulo() + " devolvido.");
+            System.out.println("\nArtigo " + e.getTitulo() + " devolvido.");
             e.setQuantidade(e.getQuantidade() + 1);
         }
     }
