@@ -28,7 +28,8 @@ public class SubMenuConfiguracao {
 
             switch (opcao) {
             case 1: System.out.println("Multa atual = "+l.config.getMulta());
-                    System.out.println("Multa atual = "+l.config.getMulta());
+                    System.out.println("Digite a nova multa : ");
+                    scanner.nextDouble();
                 break;
             case 2: 
                 break;
