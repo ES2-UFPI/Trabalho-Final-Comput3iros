@@ -127,9 +127,11 @@ public class Locadora {
 
     // Metodo para calcular o valor da Multa dependendo da categoria
     public double calculaMulta(long dataDev, long dataEmp, String categoria) {
-        /*long milisegundosEmUmDia = 86400000;
-
-        Date data = new Date();*/
+        /*
+         * long milisegundosEmUmDia = 86400000;
+         * 
+         * Date data = new Date();
+         */
 
         long dias_passados = dataDev - dataEmp;
 
@@ -178,6 +180,15 @@ public class Locadora {
         Locatario l = this.pesquisarLocatario(matricula);
         Exemplar e = this.pesquisarExemplar(codigoEx);
 
+        if (l == null) {
+            System.out.println("\nLocatário não existe.");
+            return;
+        }
+        if (e == null) {
+            System.out.println("\nExemplar não existe.");
+            return;
+        }
+
         long milisegundosEmUmDia = 86400000;
 
         Date data = new Date();
@@ -185,7 +196,8 @@ public class Locadora {
         long dataEmp = 0;
 
         for (Emprestimo emp : this.emprestimos) {
-            if ((emp.getLocatario().getMatricula() == l.getMatricula()) && (emp.getExemplar().getCodigo() == e.getCodigo())) {
+            if ((emp.getLocatario().getMatricula() == l.getMatricula())
+                    && (emp.getExemplar().getCodigo() == e.getCodigo())) {
                 dataEmp = emp.getDataEmp();
             }
         }
@@ -243,7 +255,7 @@ public class Locadora {
         long devolucao = data_atual.getTime() + (dtDevol * milisegundosEmUmDia);
 
         Emprestimo emp = new Emprestimo(e, l, dtEmprestimo, devolucao);
-        
+
         if (e instanceof Livro) {
             System.out.println("\nLivro tirado da biblioteca de exemplares...");
             exemplares.remove(e);
@@ -252,7 +264,7 @@ public class Locadora {
             System.out.println("\nArtigo tirado da biblioteca de exemplares...");
             exemplares.remove(e);
         }
-        
+
         this.emprestimos.add(emp);
         System.out.println("\nEmpréstimo realizado! Data de devolução:  " + devolucao);
 
