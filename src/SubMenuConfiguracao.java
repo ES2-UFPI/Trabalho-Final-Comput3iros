@@ -30,7 +30,7 @@ public class SubMenuConfiguracao {
             case 1: System.out.println("Multa atual = "+l.config.getMulta());
                     System.out.println("Digite a nova multa : ");
                     double mult=scanner.nextDouble();
-
+                    l.config.setMulta(mult);
                     scanner.close();
                 break;
             case 2: 
