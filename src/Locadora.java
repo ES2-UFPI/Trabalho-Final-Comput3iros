@@ -129,8 +129,7 @@ public class Locadora {
     public static double calculaMulta(Date dataDev, Date dataEmp, String categoria) {
         long milisegundosEmUmDia = 86400000;
 
-        long dias = dataDev.getTime() - dataEmp.getTime(); // dataDevolução - dataEmprestimo = dias que passaram
-        long dias_passados = (dias / milisegundosEmUmDia); // ficar em dias
+        long dias_passados = (int)(dataDev.getTime() - dataEmp.getTime())/milisegundosEmUmDia;
 
         if (categoria.equals("aluno")) {
             long dias_permitidos = config.getDiasAluno(); // vem dias como inteiro
@@ -173,6 +172,18 @@ public class Locadora {
         return 0;
     }
 
+    public void realizarDevolucao(String matricula, String codigoEx) {
+        Locatario l = this.pesquisarLocatario(matricula);
+        Exemplar e = this.pesquisarExemplar(codigoEx);
+
+        long milisegundosEmUmDia = 86400000;
+
+        Date data = new Date();
+        long dia_atual = data.getTime() / milisegundosEmUmDia; // dataDevolução - dataEmprestimo = dias que passaram
+
+        double multa = this.calculaMulta(dia_atual, dataEmp, categoria);
+    }
+
     // Caso não seja possível realizar o empréstimo por todos os exemplares do
     // estoque estarem emprestados, então é retornado null.
     public Emprestimo realizarEmprestimo(String matricula, String codigoEx) {
@@ -194,7 +205,7 @@ public class Locadora {
                                                              // disponivel
             return null;
         }
-        
+
         Date data_atual = new Date();
         long dtEmprestimo = data_atual.getTime(); // data atual que ta sendo emprestado
         long dtDevol = 0;
@@ -209,11 +220,10 @@ public class Locadora {
             dtDevol = config.getDiasTec();
         }
 
-        long devolucao = data_atual.getTime() * (dtDevol * milisegundosEmUmDia);
+        long devolucao = data_atual.getTime() + (dtDevol * milisegundosEmUmDia);
 
         Emprestimo emp = new Emprestimo(e, l, dtEmprestimo, devolucao);
-        this.emprestimos.add(emp);
-
+        
         if (e instanceof Livro) {
             System.out.println("\nLivro tirado da biblioteca de exemplares...");
             exemplares.remove(e);
@@ -223,6 +233,7 @@ public class Locadora {
             exemplares.remove(e);
         }
         
+        this.emprestimos.add(emp);
         System.out.println("\nEmpréstimo realizado! Data de devolução:  " + devolucao);
 
         return emp;
