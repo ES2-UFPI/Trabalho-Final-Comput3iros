@@ -233,11 +233,6 @@ public class Locadora {
             return null;
         }
 
-        if (!(quantidadeEmprestada(e) < e.getQuantidade())) {// Quantidade emprestada eh menor que a quantidade
-                                                             // disponivel
-            return null;
-        }
-
         Date data_atual = new Date();
         long dtEmprestimo = data_atual.getTime(); // data atual que ta sendo emprestado
         long dtDevol = 0;
@@ -259,8 +254,7 @@ public class Locadora {
         if (e instanceof Livro) {
             if (e.getQuantidade() < 2) {
                 return null;
-            }
-            else {
+            } else {
                 System.out.println("\nLivro tirado da biblioteca de exemplares...");
                 this.emprestimos.add(emp);
                 e.setQuantidade(e.getQuantidade() - 1);
@@ -270,8 +264,7 @@ public class Locadora {
         if (e instanceof Artigo) {
             if (e.getQuantidade() < 2) {
                 return null;
-            }
-            else {
+            } else {
                 System.out.println("\nArtigo tirado da biblioteca de exemplares...");
                 this.emprestimos.add(emp);
                 e.setQuantidade(e.getQuantidade() - 1);
@@ -279,16 +272,6 @@ public class Locadora {
         }
 
         return emp;
-    }
-
-    private int quantidadeEmprestada(Exemplar ex) {
-        int cont = 0;
-        for (Emprestimo emp : emprestimos) {
-            if (emp.getExemplar().getCodigo() == ex.getCodigo() && emp.isDevolvido() == false) {
-                cont++;
-            }
-        }
-        return cont;
     }
 
     public void isDevolvido(Emprestimo em) {
