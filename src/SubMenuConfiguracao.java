@@ -47,10 +47,3 @@ public class SubMenuConfiguracao {
 
 
 
-System.out.println("\n       ### Locadora - Sistema de Empréstimos e Devoluções ###");
-System.out.println("\n                  ===================================");
-System.out.println("                  |          Configuracao           |");
-System.out.println("                  ===================================");
-
-
-
