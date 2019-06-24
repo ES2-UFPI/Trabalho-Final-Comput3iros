@@ -23,15 +23,18 @@ public class SubMenuConfiguracao {
             while (opcao < 0 || opcao > 4) {
                 System.out.print("                  Opção ->  ");
                 opcao = scanner.nextInt();
+                scanner.close();
                 
             }
 
             switch (opcao) {
             case 1: System.out.println("Multa atual = "+l.config.getMulta());
-                    System.out.println("Digite a nova multa : ");
-                    double mult=scanner.nextDouble();
+                    Scanner pegamul = new Scanner(System.in);
+                    double mult;
+                    System.out.print("Digite a nova multa :");
+                    mult=pegamul.nextDouble();
                     l.config.setMulta(mult);
-                    scanner.close();
+                    pegamul.close();
                 break;
             case 2: 
                 break;
