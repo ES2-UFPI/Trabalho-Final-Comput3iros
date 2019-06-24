@@ -56,7 +56,7 @@ public class Emprestimo {
 
     public boolean isAtrasado() {
         Date dataAtual = new Date();
-        if (dataAtual.compareTo(this.getDataDevol()) > 0) { // Se estiver atrasado (dataAtaul > dataDevol)
+        if (dataAtual.compareTo(this.getDataDevol()) > 0) { // Se estiver atrasado (dataAtual > dataDevol)
             return true;
         }
         return false;

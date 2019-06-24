@@ -1,3 +1,4 @@
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
@@ -60,7 +61,7 @@ public class Locadora {
         Exemplar e = this.pesquisarExemplar(codigo);
 
         if (e != null) {
-            System.out.println("Livrp ja existente");
+            System.out.println("Livro ja existente");
             return;
         }
 
@@ -130,15 +131,16 @@ public class Locadora {
     }
 
     // Metodo para calcular o valor da Multa dependendo da categoria
-    @SuppressWarnings("deprecation")
     public static double calculaMulta(Date dataDev, Date dataEmp, String categoria) {
         long milisegundosEmUmDia = 86400000;
-        int dias_passados = dataDev.getDay() - dataEmp.getDay(); // dataDevolução - dataEmprestimo = dias que passaram
+
+        long dias = dataDev.getTime() - dataEmp.getTime(); // dataDevolução - dataEmprestimo = dias que passaram
+        long dias_passados = (dias / milisegundosEmUmDia); // ficar em dias
 
         if (categoria == "aluno") {
-            int dias_permitidos = config.getDiasAluno();
+            long dias_permitidos = config.getDiasAluno(); // vem dias como inteiro
             if (dias_passados > dias_permitidos) {
-                int dias_multa = dias_passados - dias_permitidos;
+                long dias_multa = dias_passados - dias_permitidos;
                 double multa = config.getMulta() * dias_multa;
                 return multa;
             } else {
@@ -149,9 +151,9 @@ public class Locadora {
         }
 
         if (categoria == "professor") {
-            int dias_permitidos = config.getDiasProf();
+            long dias_permitidos = config.getDiasProf(); // vem dias como inteiro
             if (dias_passados > dias_permitidos) {
-                int dias_multa = dias_passados - dias_permitidos;
+                long dias_multa = dias_passados - dias_permitidos;
                 double multa = config.getMulta() * dias_multa;
                 return multa;
             } else {
@@ -162,9 +164,9 @@ public class Locadora {
         }
 
         if (categoria == "tecnico") {
-            int dias_permitidos = config.getDiasTec();
+            long dias_permitidos = config.getDiasTec(); // vem dias como inteiro
             if (dias_passados > dias_permitidos) {
-                int dias_multa = dias_passados - dias_permitidos;
+                long dias_multa = dias_passados - dias_permitidos;
                 double multa = config.getMulta() * dias_multa;
                 return multa;
             } else {
