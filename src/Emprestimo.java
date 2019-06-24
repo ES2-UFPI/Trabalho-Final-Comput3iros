@@ -12,6 +12,7 @@ public class Emprestimo {
         this.locatario = locatario;
         this.dataEmp = dataEmp;
         this.dataDevol = dataDevol;
+        this.isDevolvido = false;
     }
 
     public Locatario getLocatario() {

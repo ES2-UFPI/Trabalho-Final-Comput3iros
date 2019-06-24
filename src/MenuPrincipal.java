@@ -32,10 +32,9 @@ public class MenuPrincipal {
                 break;
 
             case 2: // Cadastrar emprestimo
-
                 String matricula = "";
                 String codigoEx = "";
-                
+
                 do {
                     System.out.println("\nMatrícula: ");
                     matricula = in.nextLine();
@@ -50,6 +49,20 @@ public class MenuPrincipal {
                 break;
 
             case 3: // Cadastrar devolucao
+                matricula = "";
+                codigoEx = "";
+
+                do {
+                    System.out.println("\nMatrícula: ");
+                    matricula = in.nextLine();
+                } while ((l.pesquisarLocatario(matricula) != null) || matricula.equals(""));
+
+                do {
+                    System.out.println("\nCódigo do exemplar: ");
+                    codigoEx = in.nextLine();
+                } while ((l.pesquisarExemplar(codigoEx) != null) || codigoEx.equals(""));
+
+                l.realizarDevolucao(matricula, codigoEx);
                 break;
             case 4: // Cadastrar relatorio
                 System.out.println("\n       ### Locadora - Sistema de Empréstimos e Devoluções ###");

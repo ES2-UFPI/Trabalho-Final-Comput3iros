@@ -127,37 +127,24 @@ public class Locadora {
 
     // Metodo para calcular o valor da Multa dependendo da categoria
     public double calculaMulta(long dataDev, long dataEmp, String categoria) {
-        /*
-         * long milisegundosEmUmDia = 86400000;
-         * 
-         * Date data = new Date();
-         */
-
+        double multa = 0;
         long dias_passados = dataDev - dataEmp;
 
         if (categoria.equals("aluno")) {
             long dias_permitidos = config.getDiasAluno(); // vem dias como inteiro
+
             if (dias_passados > dias_permitidos) {
                 long dias_multa = dias_passados - dias_permitidos;
-                double multa = config.getMulta() * dias_multa;
-                return multa;
-            } else {
-                double multa = 0;
-                System.out.println("\nNao teve nenhum valor de multas.");
-                return multa;
+                multa = config.getMulta() * dias_multa;
             }
         }
 
         if (categoria.equals("professor")) {
             long dias_permitidos = config.getDiasProf(); // vem dias como inteiro
+
             if (dias_passados > dias_permitidos) {
                 long dias_multa = dias_passados - dias_permitidos;
-                double multa = config.getMulta() * dias_multa;
-                return multa;
-            } else {
-                double multa = 0;
-                System.out.println("\nNao teve nenhum valor de multas.");
-                return multa;
+                multa = config.getMulta() * dias_multa;
             }
         }
 
@@ -165,15 +152,13 @@ public class Locadora {
             long dias_permitidos = config.getDiasTec(); // vem dias como inteiro
             if (dias_passados > dias_permitidos) {
                 long dias_multa = dias_passados - dias_permitidos;
-                double multa = config.getMulta() * dias_multa;
-                return multa;
-            } else {
-                double multa = 0;
-                System.out.println("\nNao teve nenhum valor de multas.");
-                return multa;
+                multa = config.getMulta() * dias_multa;
             }
         }
-        return 0;
+        if (multa == 0) {
+            System.out.println("\nNao teve nenhum valor de multas.\n");
+        }
+        return multa;
     }
 
     public void realizarDevolucao(String matricula, String codigoEx) {
@@ -204,34 +189,38 @@ public class Locadora {
 
         String categoria = l.getCategoria();
         double multa = this.calculaMulta(dia_atual, dataEmp, categoria);
-        System.out.println("\nDevolução realizada: multa no valor de " + multa + "reais.");
 
-        if (e instanceof Livro) {
-            System.out.println("\nLivro " + e.getTitulo() + " devolvido.");
-            e.setQuantidade(e.getQuantidade() + 1);
+        if (multa > 0) {
+            System.out.println("\n\nDevolução realizada com multa no valor de R$ " + multa + ".\n");
+        } else {
+            System.out.println("\n\nDevolução realizada sem multa.\n");
         }
-        if (e instanceof Artigo) {
-            System.out.println("\nArtigo " + e.getTitulo() + " devolvido.");
-            e.setQuantidade(e.getQuantidade() + 1);
-        }
+
+        System.out.println("\nLivro " + e.getTitulo() + " devolvido.\n");
+        e.setQuantidade(e.getQuantidade() + 1);
     }
 
     // Caso não seja possível realizar o empréstimo por todos os exemplares do
     // estoque estarem emprestados, então é retornado null.
-    public Emprestimo realizarEmprestimo(String matricula, String codigoEx) {
+    public void realizarEmprestimo(String matricula, String codigoEx) {
         Locatario l = this.pesquisarLocatario(matricula);
         Exemplar e = this.pesquisarExemplar(codigoEx);
 
-        long milisegundosEmUmDia = 86400000;
-
         if (l == null) {
             System.out.println("Locatario nao encontrado.");
-            return null;
+            return;
         }
         if (e == null) {
             System.out.println("Exemplar nao encontrado.");
-            return null;
+            return;
         }
+
+        if (e.getQuantidade() < 2) { // Deve ter pelo menos um exemplar na locadora.
+            System.out.println("A locadora precisa ter pelo menos 1 exemplar, logo nao eh possivel emprestar mais.");
+            return;
+        }
+
+        long milisegundosEmUmDia = 86400000;
 
         Date data_atual = new Date();
         long dtEmprestimo = data_atual.getTime(); // data atual que ta sendo emprestado
@@ -249,29 +238,11 @@ public class Locadora {
 
         long devolucao = data_atual.getTime() + (dtDevol * milisegundosEmUmDia);
 
+        System.out.println("\n\nExemplar " + e.getTitulo() + " emprestado com sucesso!\n");
+        e.setQuantidade(e.getQuantidade() - 1);
+
         Emprestimo emp = new Emprestimo(e, l, dtEmprestimo, devolucao);
-
-        if (e instanceof Livro) {
-            if (e.getQuantidade() < 2) {
-                return null;
-            } else {
-                System.out.println("\nLivro tirado da biblioteca de exemplares...");
-                this.emprestimos.add(emp);
-                e.setQuantidade(e.getQuantidade() - 1);
-            }
-        }
-
-        if (e instanceof Artigo) {
-            if (e.getQuantidade() < 2) {
-                return null;
-            } else {
-                System.out.println("\nArtigo tirado da biblioteca de exemplares...");
-                this.emprestimos.add(emp);
-                e.setQuantidade(e.getQuantidade() - 1);
-            }
-        }
-
-        return emp;
+        this.emprestimos.add(emp);
     }
 
     public void isDevolvido(Emprestimo em) {
