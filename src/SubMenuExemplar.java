@@ -28,8 +28,12 @@ public class SubMenuExemplar {
             switch (opcao) {
             case 1: // Cadastro de Livro
                 in.nextLine();
-                System.out.println("    -> Codigo: ");
-                String codigo = in.nextLine();
+                String codigo = "";
+                do {
+                    System.out.println("    -> Codigo: ");
+                    codigo = in.nextLine();
+                } while ((l.pesquisarExemplar(codigo) != null) || codigo.equals(""));
+
                 System.out.println("    -> Titulo: ");
                 String titulo = in.nextLine();
                 System.out.println("    -> Autor: ");
