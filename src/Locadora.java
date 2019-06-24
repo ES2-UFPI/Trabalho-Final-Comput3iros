@@ -12,15 +12,19 @@ public class Locadora {
 
     public void cadastrarLocatario(String matricula, String nome, String categoria, String senha) {
         if (matricula.equals("")) {
+            System.out.println("\nMatricula não pode ser vazio.");
             return;
         }
         if (nome.equals("")) {
+            System.out.println("\nNome não pode ser vazio.");
             return;
         }
-        if (categoria.equals("")) {
+        if ((categoria.equals("")) || (categoria != "aluno") || (categoria != "aluno") || (categoria != "aluno")) {
+            System.out.println("\nCategoria inválida (aluno, professor ou técnico).");
             return;
         }
         if (senha.equals("")) {
+            System.out.println("\nSenha não pode ser vazio.");
             return;
         }
 
