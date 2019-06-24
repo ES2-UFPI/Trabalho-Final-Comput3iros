@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class SubMenuPesquisar {
-    public static void menuPesquisar() {
+    public static void menuPesquisar(Locadora locadora) {
         System.out.println("\n       ### Locadora - Sistema de Empréstimos e Devoluções ###");
         System.out.println("\n                  ===================================");
         System.out.println("                  |            Pesquisar            |");
@@ -24,9 +24,19 @@ public class SubMenuPesquisar {
         }
 
         switch (opcao) {
-        case 1: // Pesquisa Exemplar
+        case 1: Exemplar e =PesquisarExemplar.PesquisaExemp(locadora.exemplares);
+                System.out.println("Codigo : "+e.getCodigo());
+                System.out.println("Quantidade : "+e.getQuantidade());
+                System.out.println("Titulo : "+e.getTitulo());
+                System.out.println("Autor : "+e.getAutor());
+        // Pesquisa Exemplar
             break;
-        case 2: // Pesquisa Locatario
+        case 2: Locatario t = PesquisarLocatario.PesquisaLoca(locadora.locatarios);
+                System.out.println("Matricula : "+t.getMatricula());
+                System.out.println("Nome : "+t.getNome());
+                System.out.println("Categoria : "+t.getCategoria());
+                System.out.println("Senha : "+t.getSenha());
+        // Pesquisa Locatario
             break;
         case 0: // Sair
             break;

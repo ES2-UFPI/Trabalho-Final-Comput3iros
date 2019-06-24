@@ -36,7 +36,8 @@ public class MenuPrincipal {
                 break;
             case 4: // Cadastrar relatorio
                 break;
-            case 5: // Pesquisar
+            case 5: SubMenuPesquisar.menuPesquisar(l);
+             // Pesquisar
                 break;
             case 6:
                 SubMenuConfiguracao.menuConfiguracao(l);
