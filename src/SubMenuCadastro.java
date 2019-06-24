@@ -46,7 +46,6 @@ public class SubMenuCadastro {
             case 3: // Cadastro de Configuracao
                 break;
             case 0: // Sair
-                in.close();
                 break;
             default:
                 System.out.println("Opção Inválida!");

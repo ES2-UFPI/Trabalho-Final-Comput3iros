@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class MenuPrincipal {
     // Menu principal
-    public void menu(Locadora l) {
+    public static void menu(Locadora l) {
         int opcao;
         do {
             Scanner in = new Scanner(System.in);

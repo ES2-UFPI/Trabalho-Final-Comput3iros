@@ -61,8 +61,6 @@ public class SubMenuExemplar {
 
                 break;
             case 0: // Sair
-                in.nextLine();
-                in.close();
                 break;
             default:
                 System.out.println("Opção Inválida!");

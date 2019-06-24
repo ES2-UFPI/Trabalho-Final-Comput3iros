@@ -20,7 +20,6 @@ public class SubMenuPesquisar {
         while (opcao < 0 || opcao > 2) {
             System.out.print("                  Opção ->  ");
             opcao = scanner.nextInt();
-            scanner.close();
         }
 
         switch (opcao) {
