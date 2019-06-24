@@ -257,16 +257,26 @@ public class Locadora {
         Emprestimo emp = new Emprestimo(e, l, dtEmprestimo, devolucao);
 
         if (e instanceof Livro) {
-            System.out.println("\nLivro tirado da biblioteca de exemplares...");
-            exemplares.remove(e);
-        }
-        if (e instanceof Artigo) {
-            System.out.println("\nArtigo tirado da biblioteca de exemplares...");
-            exemplares.remove(e);
+            if (e.getQuantidade() < 2) {
+                return null;
+            }
+            else {
+                System.out.println("\nLivro tirado da biblioteca de exemplares...");
+                this.emprestimos.add(emp);
+                e.setQuantidade(e.getQuantidade() - 1);
+            }
         }
 
-        this.emprestimos.add(emp);
-        System.out.println("\nEmpréstimo realizado! Data de devolução:  " + devolucao);
+        if (e instanceof Artigo) {
+            if (e.getQuantidade() < 2) {
+                return null;
+            }
+            else {
+                System.out.println("\nArtigo tirado da biblioteca de exemplares...");
+                this.emprestimos.add(emp);
+                e.setQuantidade(e.getQuantidade() - 1);
+            }
+        }
 
         return emp;
     }
