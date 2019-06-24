@@ -27,7 +27,7 @@ public class SubMenuConfiguracao {
             }
 
             switch (opcao) {
-            case 1: System.out.println("Multa = "+l.config.getMulta());
+            case 1: System.out.println("Multa atual = "+l.config.getMulta());
                 break;
             case 2: 
                 break;
