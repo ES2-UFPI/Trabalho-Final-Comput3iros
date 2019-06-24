@@ -126,10 +126,12 @@ public class Locadora {
     }
 
     // Metodo para calcular o valor da Multa dependendo da categoria
-    public static double calculaMulta(Date dataDev, Date dataEmp, String categoria) {
-        long milisegundosEmUmDia = 86400000;
+    public double calculaMulta(long dataDev, long dataEmp, String categoria) {
+        /*long milisegundosEmUmDia = 86400000;
 
-        long dias_passados = (int)(dataDev.getTime() - dataEmp.getTime())/milisegundosEmUmDia;
+        Date data = new Date();*/
+
+        long dias_passados = dataDev - dataEmp;
 
         if (categoria.equals("aluno")) {
             long dias_permitidos = config.getDiasAluno(); // vem dias como inteiro
@@ -180,8 +182,26 @@ public class Locadora {
 
         Date data = new Date();
         long dia_atual = data.getTime() / milisegundosEmUmDia; // dataDevolução - dataEmprestimo = dias que passaram
+        long dataEmp = 0;
 
+        for (Emprestimo emp : this.emprestimos) {
+            if ((emp.getLocatario().getMatricula() == l.getMatricula()) && (emp.getExemplar().getCodigo() == e.getCodigo())) {
+                dataEmp = emp.getDataEmp();
+            }
+        }
+
+        String categoria = l.getCategoria();
         double multa = this.calculaMulta(dia_atual, dataEmp, categoria);
+        System.out.println("\nDevolução realizada: multa no valor de " + multa + "reais.");
+
+        if (e instanceof Livro) {
+            System.out.println("\nLivro " + e.getTitulo() + " devolvido.");
+            e.setQuantidade(e.getQuantidade() + 1);
+        }
+        if (e instanceof Artigo) {
+            System.out.println("\nLivro " + e.getTitulo() + " devolvido.");
+            e.setQuantidade(e.getQuantidade() + 1);
+        }
     }
 
     // Caso não seja possível realizar o empréstimo por todos os exemplares do
