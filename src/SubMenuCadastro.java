@@ -28,8 +28,12 @@ public class SubMenuCadastro {
             switch (opcao) {
             case 1: // Cadastro de Locatario
                 in.nextLine();
-                System.out.println("    -> Matricula: ");
-                String matricula = in.nextLine();
+                String matricula = "";
+                do {
+                    System.out.println("    -> Matricula: ");
+                    matricula = in.nextLine();
+                } while ((l.pesquisarLocatario(matricula) != null) || matricula.equals(""));
+
                 System.out.println("    -> Nome: ");
                 String nome = in.nextLine();
                 System.out.println("    -> Categoria: ");

@@ -19,7 +19,8 @@ public class Locadora {
             System.out.println("\nNome não pode ser vazio.");
             return;
         }
-        if ((categoria.equals("")) || (categoria != "aluno") || (categoria != "aluno") || (categoria != "aluno")) {
+        if ((categoria.equals("")) || (!(categoria.equals("aluno")) && !(categoria.equals("professor"))
+                && !(categoria.equals("tecnico")))) {
             System.out.println("\nCategoria inválida (aluno, professor ou técnico).");
             return;
         }
@@ -32,7 +33,7 @@ public class Locadora {
 
         this.locatarios.add(l);
 
-        System.out.println("Locatario " + l.getNome() + " adicionado!");
+        System.out.println("\n\n--> Locatario " + l.getNome() + " adicionado!");
     }
 
     // Cadastrar Livro
@@ -60,7 +61,7 @@ public class Locadora {
         Exemplar e = this.pesquisarExemplar(codigo);
 
         if (e != null) {
-            System.out.println("Livrp ja existente");
+            System.out.println("\nLivro ja existente");
             return;
         }
 
@@ -68,7 +69,7 @@ public class Locadora {
 
         this.exemplares.add(l);
 
-        System.out.println("Livro " + l.getTitulo() + " adicionado a Locadora!");
+        System.out.println("\n\n  --> Livro " + l.getTitulo() + " adicionado a Locadora!\n");
     }
 
     // Cadastrar Artigo
@@ -105,7 +106,7 @@ public class Locadora {
 
     public Locatario pesquisarLocatario(String matricula) {
         for (Locatario l : this.locatarios) {
-            if (l.getMatricula() == matricula) {
+            if (l.getMatricula().equals(matricula)) {
                 return l;
             }
         }
@@ -114,7 +115,7 @@ public class Locadora {
 
     public Exemplar pesquisarExemplar(String codigo) {
         for (Exemplar e : this.exemplares) {
-            if (e.getCodigo() == codigo) {
+            if (e.getCodigo().equals(codigo)) {
                 return e;
             }
         }
@@ -230,6 +231,11 @@ public class Locadora {
 
     // Relatorios
     public void relatorioDeLocatarios() {
+        if (this.locatarios.isEmpty()) {
+            System.out.println("\n\nNao ha Locatarios para exibir!\n\n");
+            return;
+        }
+
         ArrayList<Locatario> arrayLocatarios = new ArrayList<Locatario>(this.locatarios);
         arrayLocatarios.sort(Comparator.comparing(Locatario::getNome));
 
@@ -238,10 +244,16 @@ public class Locadora {
         for (Locatario l : arrayLocatarios) {
             System.out.println("    Locatario " + i + ":\nNome: " + l.getNome() + "\nMatricula: " + l.getMatricula()
                     + "\nCategoria: " + l.getCategoria() + "\n\n");
+            i += 1;
         }
     }
 
     public void relatorioDeExemplares() {
+        if (this.exemplares.isEmpty()) {
+            System.out.println("\n\nNao ha Exemplares para exibir!\n\n");
+            return;
+        }
+
         ArrayList<Exemplar> arrayExemplares = new ArrayList<Exemplar>(this.exemplares);
         arrayExemplares.sort(Comparator.comparing(Exemplar::getTitulo));
 
@@ -267,6 +279,11 @@ public class Locadora {
     }
 
     public void relatorioEmprestimos() {
+        if (this.emprestimos.isEmpty()) {
+            System.out.println("\n\nNao ha Emprestimos para exibir!\n\n");
+            return;
+        }
+
         Scanner in = new Scanner(System.in);
         int op = 0;
 
@@ -320,6 +337,11 @@ public class Locadora {
     }
 
     public void relatorioEmprestimosComAtraso() {
+        if (this.emprestimos.isEmpty()) {
+            System.out.println("\n\nNao ha Emprestimos com atraso para exibir!\n\n");
+            return;
+        }
+
         Scanner in = new Scanner(System.in);
         int op = 0;
 
