@@ -213,6 +213,15 @@ public class Locadora {
 
         Emprestimo emp = new Emprestimo(e, l, dtEmprestimo, devolucao);
         this.emprestimos.add(emp);
+
+        if (e instanceof Livro) {
+            System.out.println("\nLivro tirado da biblioteca de exemplares...");
+            exemplares.remove(e);
+        }
+        if (e instanceof Artigo) {
+            System.out.println("\nArtigo tirado da biblioteca de exemplares...");
+            exemplares.remove(e);
+        }
         
         System.out.println("\nEmpréstimo realizado! Data de devolução:  " + devolucao);
 
