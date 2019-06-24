@@ -202,15 +202,16 @@ public class Locadora {
         
         Date data_atual = new Date();
         long dtEmprestimo = data_atual.getTime(); // data atual que ta sendo emprestado
+        long dtDevol = 0;
 
         if (l.getCategoria().equals("aluno")) {
-            long dtDevol = config.getDiasAluno();
+            dtDevol = config.getDiasAluno();
         }
         if (l.getCategoria().equals("professor")) {
-            long dtDevol = config.getDiasProf();
+            dtDevol = config.getDiasProf();
         }
         if (l.getCategoria().equals("tecnico")) {
-            long dtDevol = config.getDiasTec();
+            dtDevol = config.getDiasTec();
         }
 
         long devolucao = data_atual.getTime() * (dtDevol * milisegundosEmUmDia);

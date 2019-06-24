@@ -30,8 +30,26 @@ public class MenuPrincipal {
             case 1: // Chamar submenu Cadastro
                 SubMenuCadastro.menuCadastro(l);
                 break;
+
             case 2: // Cadastrar emprestimo
+                System.out.println("\nMatrícula: ");
+                String matricula = in.nextLine();
+                System.out.println("\nCódigo do exemplar: ");
+                String codigoEx = in.nextLine();
+
+                do {
+                    System.out.println("\nMatrícula: ");
+                    matricula = in.nextLine();
+                } while ((l.pesquisarLocatario(matricula) != null) || matricula.equals(""));
+
+                do {
+                    System.out.println("\nCódigo do exemplar: ");
+                    codigoEx = in.nextLine();
+                } while ((l.pesquisarExemplar(codigoEx) != null) || codigoEx.equals(""));
+
+                l.realizarEmprestimo(matricula, codigoEx);
                 break;
+
             case 3: // Cadastrar devolucao
                 break;
             case 4: // Cadastrar relatorio
