@@ -36,11 +36,29 @@ public class SubMenuConfiguracao {
                     l.config.setMulta(mult);
                     pegamul.close();
                 break;
-            case 2: 
+            case 2: System.out.println("Quantidade de dias do professor = "+l.config.getDiasProf());
+                    Scanner pegaDiasProfessor = new Scanner(System.in);
+                    int DiasProfessor;
+                    System.out.print("Digite a nova quantidade de dias do professor:");
+                    DiasProfessor=pegaDiasProfessor.nextInt();
+                    l.config.setDiasProf(DiasProfessor);
+                    pegaDiasProfessor.close();
                 break;
-            case 3: 
+            case 3: System.out.println("Quantidade de dias do aluno = "+l.config.getDiasAluno());
+                    Scanner pegaDiasAluno = new Scanner(System.in);
+                    int DiasAluno;
+                    System.out.print("Digite a nova quantidade de dias do aluno:");
+                    DiasAluno=pegaDiasAluno.nextInt();
+                    l.config.setDiasAluno(DiasAluno);
+                    pegaDiasAluno.close();
                 break;
-            case 4: 
+            case 4: System.out.println("Quantidade de dias do tecnico = "+l.config.getDiasTec());
+                    Scanner pegaDiasTec = new Scanner(System.in);
+                    int DiasTec;
+                    System.out.print("Digite a nova quantidade de dias do tecnico:");
+                    DiasTec=pegaDiasTec.nextInt();
+                    l.config.setDiasTec(DiasTec);
+                    pegaDiasTec.close();
                 break;
             case 0: 
                 break;
