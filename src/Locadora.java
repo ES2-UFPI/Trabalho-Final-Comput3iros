@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.Scanner;
 
 public class Locadora {
     private ArrayList<Locatario> locatarios = new ArrayList<Locatario>();
@@ -220,5 +222,151 @@ public class Locadora {
 
     public void isDevolvido(Emprestimo em) {
         em.setDevolvido(true);
+    }
+
+    // Relatorios
+    public void relatorioDeLocatarios() {
+        ArrayList<Locatario> arrayLocatarios = new ArrayList<Locatario>(this.locatarios);
+        arrayLocatarios.sort(Comparator.comparing(Locatario::getNome));
+
+        System.out.println("\n---------> Locatarios <-----------\n");
+        int i = 1;
+        for (Locatario l : arrayLocatarios) {
+            System.out.println("    Locatario " + i + ":\nNome: " + l.getNome() + "\nMatricula: " + l.getMatricula()
+                    + "\nCategoria: " + l.getCategoria() + "\n\n");
+        }
+    }
+
+    public void relatorioDeExemplares() {
+        ArrayList<Exemplar> arrayExemplares = new ArrayList<Exemplar>(this.exemplares);
+        arrayExemplares.sort(Comparator.comparing(Exemplar::getTitulo));
+
+        System.out.println("\n---------> Exemplares <-----------\n");
+
+        for (Exemplar e : arrayExemplares) {
+            if (e instanceof Livro) {
+                int i = 1;
+                System.out.println("        Livro");
+                System.out.println("    Livro " + i + ":\nTitulo: " + e.getTitulo() + "\nAutor: " + e.getAutor()
+                        + "\nCodigo: " + e.getCodigo() + "\nQuantidade: " + e.getQuantidade() + "\nVolume: "
+                        + ((Livro) e).getVolume() + "\nQuant de paginas: " + ((Livro) e).getNumPaginas() + "\n\n");
+                i += 1;
+            } else if (e instanceof Artigo) {
+                int i = 1;
+                System.out.println("        Artigo");
+                System.out.println("    Artigo " + i + ":\nTitulo: " + e.getTitulo() + "\nAutor: " + e.getAutor()
+                        + "\nCodigo: " + e.getCodigo() + "\nQuantidade: " + e.getQuantidade() + "\nRevista: "
+                        + ((Artigo) e).getRevista() + "\n\n");
+                i += 1;
+            }
+        }
+    }
+
+    public void relatorioEmprestimos() {
+        Scanner in = new Scanner(System.in);
+        int op = 0;
+
+        if (this.emprestimos.isEmpty()) {
+            System.out.println("\nNao ha emprestimos para exibir.\n");
+            in.close();
+            return;
+        }
+
+        System.out.println("-> Relatorio de emprestimos geral ou por Locatario? <1 ou 2>");
+        do {
+            op = in.nextInt();
+        } while (op != 1 && op != 2);
+
+        ArrayList<Emprestimo> arrayEmprestimos = new ArrayList<Emprestimo>(this.emprestimos);
+        arrayEmprestimos.sort(Comparator.comparing(Emprestimo::getDataEmp));
+
+        if (op == 1) { // Geral
+            System.out.println("\n----------> Relatorio de todos os emprestimos <-------------\n");
+
+            for (Emprestimo e : arrayEmprestimos) {
+                System.out.println("Nome do locatario: " + e.getLocatario().getNome() + "\nLivro alugado: "
+                        + e.getExemplar().getTitulo() + "\nData do emprestimo: " + e.getDataEmp()
+                        + "\nData da devolucao: " + e.getDataDevol());
+            }
+        } else if (op == 2) {
+            System.out.println("\n----------> Relatorio de emprestimos de um locatario <-------------\n");
+
+            System.out.print("Digite a matricula: ");
+            String matricula = in.nextLine();
+
+            Locatario l = this.pesquisarLocatario(matricula);
+
+            if (l == null) {
+                System.out.println("\nLocatario nao encontrado.\n");
+                in.close();
+                return;
+            }
+
+            System.out.println("    Locatario " + l.getNome() + ":\n");
+
+            for (Emprestimo e : arrayEmprestimos) {
+                if (e.getLocatario().getMatricula() == l.getMatricula()) {
+                    System.out.println("\nLivro alugado: " + e.getExemplar().getTitulo() + "\nData do emprestimo: "
+                            + e.getDataEmp() + "\nData da devolucao: " + e.getDataDevol());
+                }
+            }
+        }
+
+        in.close();
+    }
+
+    public void relatorioEmprestimosComAtraso() {
+        Scanner in = new Scanner(System.in);
+        int op = 0;
+
+        if (this.emprestimos.isEmpty()) {
+            System.out.println("\nNao ha emprestimos com atraso para exibir.\n");
+            in.close();
+            return;
+        }
+
+        System.out.println("-> Relatorio de emprestimos geral ou por Locatario? <1 ou 2> ");
+        do {
+            op = in.nextInt();
+        } while (op != 1 && op != 2);
+
+        ArrayList<Emprestimo> arrayEmprestimosAtrasados = new ArrayList<Emprestimo>(this.emprestimos);
+        arrayEmprestimosAtrasados.sort(Comparator.comparing(Emprestimo::getDataEmp));
+
+        if (op == 1) { // Geral
+            System.out.println("\n----------> Relatorio de todos os emprestimos atrasados <-------------\n");
+
+            for (Emprestimo e : arrayEmprestimosAtrasados) {
+                if (e.isAtrasado()) {
+                    System.out.println("Nome do locatario: " + e.getLocatario().getNome() + "\nLivro alugado: "
+                            + e.getExemplar().getTitulo() + "\nData do emprestimo: " + e.getDataEmp()
+                            + "\nData da devolucao: " + e.getDataDevol() + "\nMulta: R$ " + "\n\n");
+                }
+            }
+        } else if (op == 2) {
+            System.out.println("\n----------> Relatorio de emprestimos de um locatario <-------------\n");
+
+            System.out.print("Digite a matricula: ");
+            String matricula = in.nextLine();
+
+            Locatario l = this.pesquisarLocatario(matricula);
+
+            if (l == null) {
+                System.out.println("\nLocatario nao encontrado.\n");
+                in.close();
+                return;
+            }
+
+            System.out.println("    Locatario " + l.getNome() + ":\n");
+
+            for (Emprestimo e : arrayEmprestimosAtrasados) {
+                if (e.getLocatario().getMatricula() == l.getMatricula() && e.isAtrasado()) {
+                    System.out.println("\nLivro alugado: " + e.getExemplar().getTitulo() + "\nData do emprestimo: "
+                            + e.getDataEmp() + "\nData da devolucao: " + e.getDataDevol() + "\nMulta: R$ " + "\n\n");
+                }
+            }
+        }
+
+        in.close();
     }
 }

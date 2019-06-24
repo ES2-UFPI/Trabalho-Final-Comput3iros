@@ -35,6 +35,37 @@ public class MenuPrincipal {
             case 3: // Cadastrar devolucao
                 break;
             case 4: // Cadastrar relatorio
+                System.out.println("\n       ### Locadora - Sistema de Empréstimos e Devoluções ###");
+                System.out.println("\n                  ===================================");
+                System.out.println("                  |             Relatorios          |");
+                System.out.println("                  ===================================");
+                System.out.println("                  |                                 |");
+                System.out.println("                  |     1 - Locatário               |");
+                System.out.println("                  |     2 - Exemplar                |");
+                System.out.println("                  |     3 - Emprestimos             |");
+                System.out.println("                  |     4 - Emprestimos atrasados   |");
+                System.out.println("                  |     0 - Sair                    |");
+                System.out.println("                  ===================================\n");
+
+                System.out.print("                  Opção ->  ");
+                opcao = in.nextInt();
+
+                switch (opcao) {
+                case 1:
+                    l.relatorioDeLocatarios();
+                    break;
+                case 2:
+                    l.relatorioDeExemplares();
+                    break;
+                case 3:
+                    l.relatorioEmprestimos();
+                    break;
+                case 4:
+                    l.relatorioEmprestimosComAtraso();
+                    break;
+                case 0:
+                    break;
+                }
                 break;
             case 5: // Pesquisar
                 break;

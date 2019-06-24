@@ -53,4 +53,12 @@ public class Emprestimo {
     public void setDevolvido(boolean devol) {
         this.isDevolvido = devol;
     }
+
+    public boolean isAtrasado() {
+        Date dataAtual = new Date();
+        if (dataAtual.compareTo(this.getDataDevol()) > 0) { // Se estiver atrasado (dataAtaul > dataDevol)
+            return true;
+        }
+        return false;
+    }
 }
