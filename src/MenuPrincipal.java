@@ -32,11 +32,10 @@ public class MenuPrincipal {
                 break;
 
             case 2: // Cadastrar emprestimo
-                System.out.println("\nMatrícula: ");
-                String matricula = in.nextLine();
-                System.out.println("\nCódigo do exemplar: ");
-                String codigoEx = in.nextLine();
 
+                String matricula = "";
+                String codigoEx = "";
+                
                 do {
                     System.out.println("\nMatrícula: ");
                     matricula = in.nextLine();

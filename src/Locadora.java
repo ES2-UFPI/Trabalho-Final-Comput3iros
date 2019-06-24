@@ -1,4 +1,3 @@
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
@@ -126,10 +125,6 @@ public class Locadora {
         return this.locatarios;
     }
 
-    public void addEmprestimo(Emprestimo em) {
-        emprestimos.add(em);
-    }
-
     // Metodo para calcular o valor da Multa dependendo da categoria
     public static double calculaMulta(Date dataDev, Date dataEmp, String categoria) {
         long milisegundosEmUmDia = 86400000;
@@ -217,7 +212,7 @@ public class Locadora {
         long devolucao = data_atual.getTime() * (dtDevol * milisegundosEmUmDia);
 
         Emprestimo emp = new Emprestimo(e, l, dtEmprestimo, devolucao);
-        addEmprestimo(emp);
+        this.emprestimos.add(emp);
         
         System.out.println("\nEmpréstimo realizado! Data de devolução:  " + devolucao);
 
