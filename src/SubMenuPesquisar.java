@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class SubMenuPesquisar {
-    public static void menuPesquisar() {
+    public static void menuPesquisar(Locadora l) {
         System.out.println("\n       ### Locadora - Sistema de Empréstimos e Devoluções ###");
         System.out.println("\n                  ===================================");
         System.out.println("                  |            Pesquisar            |");
@@ -25,11 +25,20 @@ public class SubMenuPesquisar {
 
         switch (opcao) {
         case 1: // Pesquisa Exemplar
+            System.out.println("\nDigite o código do Exemplar para pesquisa ->  ");
+            String codigo = scanner.nextLine();
+            l.pesquisarExemplar(codigo);
             break;
+
         case 2: // Pesquisa Locatario
+            System.out.println("\nDigite a matricula do Locatario para pesquisa ->  ");
+            String matricula = scanner.nextLine();
+            l.pesquisarLocatario(matricula);
             break;
+
         case 0: // Sair
             break;
+
         default:
             System.out.println("Opção Inválida!");
             break;

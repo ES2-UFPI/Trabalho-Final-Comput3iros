@@ -68,6 +68,7 @@ public class MenuPrincipal {
                 }
                 break;
             case 5: // Pesquisar
+                SubMenuPesquisar.menuPesquisar(l);
                 break;
             case 6:
                 SubMenuConfiguracao.menuConfiguracao(l);
