@@ -184,6 +184,8 @@ public class Locadora {
         Locatario l = this.pesquisarLocatario(matricula);
         Exemplar e = this.pesquisarExemplar(codigoEx);
 
+        long milisegundosEmUmDia = 86400000;
+
         if (l == null) {
             System.out.println("Locatario nao encontrado.");
             return null;
@@ -197,32 +199,37 @@ public class Locadora {
                                                              // disponivel
             return null;
         }
+        
+        Date data_atual = new Date();
+        long dtEmprestimo = data_atual.getTime(); // data atual que ta sendo emprestado
 
-        int quantDias = 0;
+        if (l.getCategoria().equals("aluno")) {
+            long dtDevol = config.getDiasAluno();
+        }
+        if (l.getCategoria().equals("professor")) {
+            long dtDevol = config.getDiasProf();
+        }
+        if (l.getCategoria().equals("tecnico")) {
+            long dtDevol = config.getDiasTec();
+        }
 
-        Date dtEmprestimo = new Date();
+        long devolucao = data_atual.getTime() * (dtDevol * milisegundosEmUmDia);
 
-        long milisegundosEmUmDia = 86400000;
-        Date dtDevol = new Date(dtEmprestimo.getTime() + (quantDias * milisegundosEmUmDia));
-
-        // multa refente ao emprestimo sendo calculada
-        double multa = calculaMulta(dtDevol, dtEmprestimo, l.getCategoria());
-
-        Emprestimo emp = new Emprestimo(e, l, dtEmprestimo, dtDevol);
+        Emprestimo emp = new Emprestimo(e, l, dtEmprestimo, devolucao);
         addEmprestimo(emp);
+        
+        System.out.println("\nEmpréstimo realizado! Data de devolução:  " + devolucao);
 
         return emp;
     }
 
     private int quantidadeEmprestada(Exemplar ex) {
         int cont = 0;
-
         for (Emprestimo emp : emprestimos) {
             if (emp.getExemplar().getCodigo() == ex.getCodigo() && emp.isDevolvido() == false) {
                 cont++;
             }
         }
-
         return cont;
     }
 
