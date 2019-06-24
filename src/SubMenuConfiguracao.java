@@ -29,7 +29,7 @@ public class SubMenuConfiguracao {
             switch (opcao) {
             case 1: 
                 break;
-            case 2: // Alterar quantidade de dias para professor
+            case 2: 
                 break;
             case 3: // Alterar quantidade de dias para aluno
                 break;
