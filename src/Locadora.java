@@ -19,7 +19,8 @@ public class Locadora {
             System.out.println("\nNome não pode ser vazio.");
             return;
         }
-        if ((categoria.equals("")) || (categoria != "aluno") || (categoria != "aluno") || (categoria != "aluno")) {
+        if ((categoria.equals("")) || (!(categoria.equals("aluno")) && !(categoria.equals("professor"))
+                && !(categoria.equals("tecnico")))) {
             System.out.println("\nCategoria inválida (aluno, professor ou técnico).");
             return;
         }
@@ -105,7 +106,7 @@ public class Locadora {
 
     public Locatario pesquisarLocatario(String matricula) {
         for (Locatario l : this.locatarios) {
-            if (l.getMatricula() == matricula) {
+            if (l.getMatricula().equals(matricula)) {
                 return l;
             }
         }
@@ -114,15 +115,11 @@ public class Locadora {
 
     public Exemplar pesquisarExemplar(String codigo) {
         for (Exemplar e : this.exemplares) {
-            if (e.getCodigo() == codigo) {
+            if (e.getCodigo().equals(codigo)) {
                 return e;
             }
         }
         return null;
-    }
-
-    public ArrayList<Locatario> getLocatarios() {
-        return this.locatarios;
     }
 
     // Metodo para calcular o valor da Multa dependendo da categoria
@@ -180,10 +177,12 @@ public class Locadora {
         long dia_atual = data.getTime() / milisegundosEmUmDia; // dataDevolução - dataEmprestimo = dias que passaram
         long dataEmp = 0;
 
+        Emprestimo emprestimo = null;
         for (Emprestimo emp : this.emprestimos) {
             if ((emp.getLocatario().getMatricula() == l.getMatricula())
                     && (emp.getExemplar().getCodigo() == e.getCodigo())) {
                 dataEmp = emp.getDataEmp();
+                emprestimo = emp;
             }
         }
 
@@ -191,6 +190,7 @@ public class Locadora {
         double multa = this.calculaMulta(dia_atual, dataEmp, categoria);
 
         if (multa > 0) {
+            emprestimo.setIsAtrasado(true);
             System.out.println("\n\nDevolução realizada com multa no valor de R$ " + multa + ".\n");
         } else {
             System.out.println("\n\nDevolução realizada sem multa.\n");
@@ -243,10 +243,6 @@ public class Locadora {
 
         Emprestimo emp = new Emprestimo(e, l, dtEmprestimo, devolucao);
         this.emprestimos.add(emp);
-    }
-
-    public void isDevolvido(Emprestimo em) {
-        em.setDevolvido(true);
     }
 
     // Relatorios
@@ -330,7 +326,7 @@ public class Locadora {
             System.out.println("    Locatario " + l.getNome() + ":\n");
 
             for (Emprestimo e : arrayEmprestimos) {
-                if (e.getLocatario().getMatricula() == l.getMatricula()) {
+                if (e.getLocatario().getMatricula().equals(l.getMatricula())) {
                     System.out.println("\nLivro alugado: " + e.getExemplar().getTitulo() + "\nData do emprestimo: "
                             + e.getDataEmp() + "\nData da devolucao: " + e.getDataDevol());
                 }
@@ -350,7 +346,7 @@ public class Locadora {
             return;
         }
 
-        System.out.println("-> Relatorio de emprestimos geral ou por Locatario? <1 ou 2> ");
+        System.out.println("-> Relatorio de emprestimos atrasados geral ou por Locatario? <1 ou 2> ");
         do {
             op = in.nextInt();
         } while (op != 1 && op != 2);
@@ -385,7 +381,7 @@ public class Locadora {
             System.out.println("    Locatario " + l.getNome() + ":\n");
 
             for (Emprestimo e : arrayEmprestimosAtrasados) {
-                if (e.getLocatario().getMatricula() == l.getMatricula() && e.isAtrasado()) {
+                if (e.getLocatario().getMatricula().equals(l.getMatricula()) && e.isAtrasado()) {
                     System.out.println("\nLivro alugado: " + e.getExemplar().getTitulo() + "\nData do emprestimo: "
                             + e.getDataEmp() + "\nData da devolucao: " + e.getDataDevol() + "\nMulta: R$ " + "\n\n");
                 }

@@ -1,18 +1,16 @@
-import java.util.Date;
-
 public class Emprestimo {
     private Exemplar exemplar;
     private Locatario locatario;
     private long dataEmp;
     private long dataDevol;
-    private boolean isDevolvido;
+    private boolean isAtrasado;
 
     public Emprestimo(Exemplar exemplar, Locatario locatario, long dataEmp, Long dataDevol) {
         this.exemplar = exemplar;
         this.locatario = locatario;
         this.dataEmp = dataEmp;
         this.dataDevol = dataDevol;
-        this.isDevolvido = false;
+        this.isAtrasado = false;
     }
 
     public Locatario getLocatario() {
@@ -47,20 +45,11 @@ public class Emprestimo {
         this.dataDevol = dataDevol;
     }
 
-    public boolean isDevolvido() {
-        return isDevolvido;
-    }
-
-    public void setDevolvido(boolean devol) {
-        this.isDevolvido = devol;
-    }
-
     public boolean isAtrasado() {
-        Date data = new Date();
-        long dataAtual = data.getTime();
-        if (dataAtual > dataDevol) { // Se estiver atrasado (dataAtual > dataDevol)
-            return true;
-        }
-        return false;
+        return isAtrasado;
+    }
+
+    public void setIsAtrasado(boolean atrasado) {
+        this.isAtrasado = atrasado;
     }
 }
