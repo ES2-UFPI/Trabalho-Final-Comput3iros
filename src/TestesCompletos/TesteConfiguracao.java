@@ -3,8 +3,6 @@ package TestesCompletos;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
-import functions.*;
-
 public class TesteConfiguracao {
 
     @Test
