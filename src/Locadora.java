@@ -8,7 +8,7 @@ public class Locadora {
     private ArrayList<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
     private ArrayList<Exemplar> exemplares = new ArrayList<Exemplar>();
 
-    public static Configuracao config=new Configuracao(2,7,10,12); // inicializando configuracao
+    public static Configuracao config = null;
 
     public void cadastrarLocatario(String matricula, String nome, String categoria, String senha) {
         if (matricula.equals("")) {
@@ -159,6 +159,11 @@ public class Locadora {
     }
 
     public void realizarDevolucao(String matricula, String codigoEx) {
+        if (this.config == null) {
+            System.out.println("\nNenhuma configuracao cadastrada.\n");
+            return;
+        }
+
         Locatario l = this.pesquisarLocatario(matricula);
         Exemplar e = this.pesquisarExemplar(codigoEx);
 
@@ -203,6 +208,11 @@ public class Locadora {
     // Caso não seja possível realizar o empréstimo por todos os exemplares do
     // estoque estarem emprestados, então é retornado null.
     public void realizarEmprestimo(String matricula, String codigoEx) {
+        if (this.config == null) {
+            System.out.println("\nNenhuma configuracao cadastrada.\n");
+            return;
+        }
+
         Locatario l = this.pesquisarLocatario(matricula);
         Exemplar e = this.pesquisarExemplar(codigoEx);
 
@@ -352,8 +362,6 @@ public class Locadora {
         in.close();
     }
 
-
-
     public void relatorioEmprestimosComAtraso() {
         if (this.emprestimos.isEmpty()) {
             System.out.println("\n\nNao ha Emprestimos com atraso para exibir!\n\n");
@@ -412,5 +420,14 @@ public class Locadora {
         }
 
         in.close();
+    }
+
+    public void relatorioDeConfiguracoes() {
+        if (this.config == null) {
+            System.out.println("\nNenhuma configuracao cadastrada.\n");
+        }
+
+        System.out.println("\n\nValor da multa: " + this.config.getMulta() + "\nDias prof: " + this.config.getDiasProf()
+                + "\nDias aluno: " + this.config.getDiasAluno() + "\nDias tecnico: " + this.config.getDiasTec());
     }
 }

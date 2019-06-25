@@ -15,13 +15,14 @@ public class SubMenuRelatorio {
             System.out.println("                  |     2 - Exemplar                |");
             System.out.println("                  |     3 - Emprestimos             |");
             System.out.println("                  |     4 - Emprestimos atrasados   |");
+            System.out.println("                  |     5 - Configuracoes           |");
             System.out.println("                  |     0 - Sair                    |");
             System.out.println("                  ===================================\n");
 
             System.out.print("                  Opção ->  ");
             opcao = in.nextInt();
 
-            while (opcao < 0 || opcao > 4) {
+            while (opcao < 0 || opcao > 5) {
                 System.out.print("                  Opção ->  ");
                 opcao = in.nextInt();
             }
@@ -38,6 +39,9 @@ public class SubMenuRelatorio {
                 break;
             case 4: // Relatorios de Emprestimos com atraso
                 l.relatorioEmprestimosComAtraso();
+                break;
+            case 5: // Relatorios de Configuracoes
+                l.relatorioDeConfiguracoes();
                 break;
             case 0:
                 break;
