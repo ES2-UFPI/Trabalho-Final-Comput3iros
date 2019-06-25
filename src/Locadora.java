@@ -258,8 +258,9 @@ public class Locadora {
 
         long devolucao = data_atual.getTime() + (dtDevol * milisegundosEmUmDia);
 
-        System.out.println("\n\nExemplar " + e.getTitulo() + " emprestado com sucesso!\nData de devolucao: "
-                + (new Date(devolucao)) + "\n");
+        System.out
+                .println("\n\nExemplar " + e.getTitulo() + " emprestado com sucesso!\nQuantidade restante na Locadora: "
+                        + e.getQuantidade() + "\nData de devolucao: " + (new Date(devolucao)) + "\n");
         e.setQuantidade(e.getQuantidade() - 1);
 
         Emprestimo emp = new Emprestimo(e, l, dtEmprestimo, devolucao);
