@@ -5,14 +5,6 @@ public class Configuracao {
 	private int diasProf;
 	private int diasTecnico;
 
-	public Configuracao(double multa, int diasAluno, int diasProf, int diasTecnico) {
-		this.setMulta(multa);
-		this.setDiasAluno(diasAluno);
-		this.setDiasProf(diasProf);
-		this.setDiasTec(diasTecnico);
-
-	}
-
 	public int getDiasProf() {
 		return diasProf;
 	}

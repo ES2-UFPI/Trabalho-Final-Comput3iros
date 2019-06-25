@@ -8,7 +8,7 @@ public class Locadora {
     private ArrayList<Emprestimo> emprestimos = new ArrayList<Emprestimo>();
     private ArrayList<Exemplar> exemplares = new ArrayList<Exemplar>();
 
-    public static Configuracao config;
+    public static Configuracao config = new Configuracao();
 
     public void cadastrarLocatario(String matricula, String nome, String categoria, String senha) {
         if (matricula.equals("")) {
@@ -122,6 +122,22 @@ public class Locadora {
         return null;
     }
 
+    public void validarArrays() {
+        if (this.locatarios.isEmpty()) {
+            System.out.println("\n Nao ha locatarios cadastrados!.");
+            return;
+        }
+        if (this.exemplares.isEmpty()) {
+            System.out.println("\n Nao ha exemplares cadastrados!.");
+            return;
+        }
+        if (this.config == null) {
+            System.out.println("\n Nao ha configuracao cadastrada!.");
+            return;
+        }
+        return;
+    }
+
     // Metodo para calcular o valor da Multa dependendo da categoria
     public double calculaMulta(long dataDev, long dataEmp, String categoria) {
         double multa = 0;
@@ -159,6 +175,8 @@ public class Locadora {
     }
 
     public void realizarDevolucao(String matricula, String codigoEx) {
+        this.validarArrays();
+
         Locatario l = this.pesquisarLocatario(matricula);
         Exemplar e = this.pesquisarExemplar(codigoEx);
 
@@ -203,6 +221,8 @@ public class Locadora {
     // Caso não seja possível realizar o empréstimo por todos os exemplares do
     // estoque estarem emprestados, então é retornado null.
     public void realizarEmprestimo(String matricula, String codigoEx) {
+        this.validarArrays();
+
         Locatario l = this.pesquisarLocatario(matricula);
         Exemplar e = this.pesquisarExemplar(codigoEx);
 
@@ -238,7 +258,8 @@ public class Locadora {
 
         long devolucao = data_atual.getTime() + (dtDevol * milisegundosEmUmDia);
 
-        System.out.println("\n\nExemplar " + e.getTitulo() + " emprestado com sucesso!\n");
+        System.out.println("\n\nExemplar " + e.getTitulo() + " emprestado com sucesso!\nData de devolucao: "
+                + (new Date(devolucao)) + "\n");
         e.setQuantidade(e.getQuantidade() - 1);
 
         Emprestimo emp = new Emprestimo(e, l, dtEmprestimo, devolucao);
@@ -303,12 +324,6 @@ public class Locadora {
         Scanner in = new Scanner(System.in);
         int op = 0;
 
-        if (this.emprestimos.isEmpty()) {
-            System.out.println("\nNao ha emprestimos para exibir.\n");
-            in.close();
-            return;
-        }
-
         System.out.println("-> Relatorio de emprestimos geral ou por Locatario? <1 ou 2>");
         do {
             op = in.nextInt();
@@ -322,8 +337,8 @@ public class Locadora {
 
             for (Emprestimo e : arrayEmprestimos) {
                 System.out.println("Nome do locatario: " + e.getLocatario().getNome() + "\nLivro alugado: "
-                        + e.getExemplar().getTitulo() + "\nData do emprestimo: " + e.getDataEmp()
-                        + "\nData da devolucao: " + e.getDataDevol());
+                        + e.getExemplar().getTitulo() + "\nData do emprestimo: " + (new Date(e.getDataEmp()))
+                        + "\nData da devolucao: " + (new Date(e.getDataDevol())));
             }
         } else if (op == 2) {
             System.out.println("\n----------> Relatorio de emprestimos de um locatario <-------------\n");
@@ -344,12 +359,10 @@ public class Locadora {
             for (Emprestimo e : arrayEmprestimos) {
                 if (e.getLocatario().getMatricula().equals(l.getMatricula())) {
                     System.out.println("\nLivro alugado: " + e.getExemplar().getTitulo() + "\nData do emprestimo: "
-                            + e.getDataEmp() + "\nData da devolucao: " + e.getDataDevol());
+                            + (new Date(e.getDataEmp())) + "\nData da devolucao: " + (new Date(e.getDataDevol())));
                 }
             }
         }
-
-        in.close();
     }
 
     public void relatorioEmprestimosComAtraso() {
@@ -410,5 +423,26 @@ public class Locadora {
         }
 
         in.close();
+    }
+
+    public void relatorioDeConfiguracoes() {
+        if (this.config == null) {
+            System.out.println("\nNenhuma configuracao cadastrada.\n");
+        }
+
+        System.out.println("\n\nValor da multa: " + this.config.getMulta() + "\nDias prof: " + this.config.getDiasProf()
+                + "\nDias aluno: " + this.config.getDiasAluno() + "\nDias tecnico: " + this.config.getDiasTec());
+    }
+
+    public ArrayList<Locatario> getArrayLocatarios() {
+        return this.locatarios;
+    }
+
+    public ArrayList<Exemplar> getArrayExemplares() {
+        return this.exemplares;
+    }
+
+    public ArrayList<Emprestimo> getArrayEmprestimos() {
+        return this.emprestimos;
     }
 }
