@@ -67,19 +67,27 @@ public class MenuPrincipal {
                 } else if (l.getArrayExemplares().isEmpty()) {
                     System.out.println("\nNao ha Exemplares cadastrados!");
                     break;
+                } else if (l.config.getMulta() == 0) {
+                    System.out.println("\nNao ha Configuracao cadastrada!");
+                    break;
+                } else if (l.getArrayEmprestimos().isEmpty()) {
+                    System.out.println("\nNao ha Emprestimos cadastrados!");
+                    break;
                 }
+
                 matricula = "";
                 codigoEx = "";
 
+                in.nextLine();
                 do {
                     System.out.println("\nMatrícula: ");
                     matricula = in.nextLine();
-                } while ((l.pesquisarLocatario(matricula) != null) || matricula.equals(""));
+                } while ((l.pesquisarLocatario(matricula) == null) || matricula.equals(""));
 
                 do {
                     System.out.println("\nCódigo do exemplar: ");
                     codigoEx = in.nextLine();
-                } while ((l.pesquisarExemplar(codigoEx) != null) || codigoEx.equals(""));
+                } while ((l.pesquisarExemplar(codigoEx) == null) || codigoEx.equals(""));
 
                 l.realizarDevolucao(matricula, codigoEx);
                 break;
@@ -92,6 +100,7 @@ public class MenuPrincipal {
             case 6:
                 if (l.config.getMulta() == 0) {
                     System.out.println("\nNao ha configuracao cadastrada!\n");
+                    break;
                 }
                 SubMenuConfiguracao.menuConfiguracao(l);
                 // Alterar Configuracao
