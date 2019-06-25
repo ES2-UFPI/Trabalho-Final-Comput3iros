@@ -101,7 +101,7 @@ public class Locadora {
 
         this.exemplares.add(a);
 
-        System.out.println("Artigo " + a.getTitulo() + " adicionado a Locadora!");
+        System.out.println("\n\n  --> Artigo " + a.getTitulo() + " adicionado a Locadora!\n");
     }
 
     public Locatario pesquisarLocatario(String matricula) {
@@ -214,7 +214,8 @@ public class Locadora {
             System.out.println("\n\nDevolução realizada sem multa.\n");
         }
 
-        System.out.println("\nLivro " + e.getTitulo() + " devolvido.\n");
+        System.out.println("   -> Exemplar " + e.getTitulo() + " devolvido.\nQuantidade disponivel na locadora: "
+                + (e.getQuantidade() + 1) + "\n");
         e.setQuantidade(e.getQuantidade() + 1);
     }
 
@@ -260,7 +261,7 @@ public class Locadora {
 
         System.out
                 .println("\n\nExemplar " + e.getTitulo() + " emprestado com sucesso!\nQuantidade restante na Locadora: "
-                        + e.getQuantidade() + "\nData de devolucao: " + (new Date(devolucao)) + "\n");
+                        + (e.getQuantidade() - 1) + "\nData de devolucao: " + (new Date(devolucao)) + "\n");
         e.setQuantidade(e.getQuantidade() - 1);
 
         Emprestimo emp = new Emprestimo(e, l, dtEmprestimo, devolucao);
@@ -300,14 +301,14 @@ public class Locadora {
         for (Exemplar e : arrayExemplares) {
             if (e instanceof Livro) {
                 int i = 1;
-                System.out.println("        Livro");
+                System.out.println("        Livro\n");
                 System.out.println("    Livro " + i + ":\nTitulo: " + e.getTitulo() + "\nAutor: " + e.getAutor()
                         + "\nCodigo: " + e.getCodigo() + "\nQuantidade: " + e.getQuantidade() + "\nVolume: "
                         + ((Livro) e).getVolume() + "\nQuant de paginas: " + ((Livro) e).getNumPaginas() + "\n\n");
                 i += 1;
             } else if (e instanceof Artigo) {
                 int i = 1;
-                System.out.println("        Artigo");
+                System.out.println("        Artigo\n");
                 System.out.println("    Artigo " + i + ":\nTitulo: " + e.getTitulo() + "\nAutor: " + e.getAutor()
                         + "\nCodigo: " + e.getCodigo() + "\nQuantidade: " + e.getQuantidade() + "\nRevista: "
                         + ((Artigo) e).getRevista() + "\n\n");
@@ -325,7 +326,7 @@ public class Locadora {
         Scanner in = new Scanner(System.in);
         int op = 0;
 
-        System.out.println("-> Relatorio de emprestimos geral ou por Locatario? <1 ou 2>");
+        System.out.println("\n-> Relatorio de emprestimos geral ou por Locatario? <1 ou 2>");
         do {
             op = in.nextInt();
         } while (op != 1 && op != 2);
@@ -344,6 +345,7 @@ public class Locadora {
         } else if (op == 2) {
             System.out.println("\n----------> Relatorio de emprestimos de um locatario <-------------\n");
 
+            in.nextLine();
             System.out.print("Digite a matricula: ");
             String matricula = in.nextLine();
 
@@ -351,7 +353,6 @@ public class Locadora {
 
             if (l == null) {
                 System.out.println("\nLocatario nao encontrado.\n");
-                in.close();
                 return;
             }
 
@@ -396,6 +397,7 @@ public class Locadora {
         } else if (op == 2) {
             System.out.println("\n----------> Relatorio de emprestimos de um locatario <-------------\n");
 
+            in.nextLine();
             System.out.print("Digite a matricula: ");
             String matricula = in.nextLine();
 
@@ -403,11 +405,8 @@ public class Locadora {
 
             if (l == null) {
                 System.out.println("\nLocatario nao encontrado.\n");
-                in.close();
                 return;
             }
-
-            System.out.println("    Locatario " + l.getNome() + ":\n");
 
             for (Emprestimo e : arrayEmprestimosAtrasados) {
                 if (e.getLocatario().getMatricula().equals(l.getMatricula()) && e.isAtrasado()) {
@@ -416,8 +415,6 @@ public class Locadora {
                 }
             }
         }
-
-        in.close();
     }
 
     public void relatorioDeConfiguracoes() {

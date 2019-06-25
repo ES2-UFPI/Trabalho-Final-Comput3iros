@@ -70,6 +70,9 @@ public class MenuPrincipal {
                 } else if (l.config.getMulta() == 0) {
                     System.out.println("\nNao ha Configuracao cadastrada!");
                     break;
+                } else if (l.getArrayEmprestimos().isEmpty()) {
+                    System.out.println("\nNao ha Emprestimos cadastrados!");
+                    break;
                 }
 
                 matricula = "";
@@ -97,6 +100,7 @@ public class MenuPrincipal {
             case 6:
                 if (l.config.getMulta() == 0) {
                     System.out.println("\nNao ha configuracao cadastrada!\n");
+                    break;
                 }
                 SubMenuConfiguracao.menuConfiguracao(l);
                 // Alterar Configuracao
