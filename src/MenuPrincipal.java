@@ -32,6 +32,17 @@ public class MenuPrincipal {
                 break;
 
             case 2: // Cadastrar emprestimo
+                if (l.getArrayLocatarios().isEmpty()) {
+                    System.out.println("\nNao ha Locatarios cadastrados!");
+                    break;
+                } else if (l.getArrayExemplares().isEmpty()) {
+                    System.out.println("\nNao ha Exemplares cadastrados!");
+                    break;
+                } else if (l.config.getMulta() == 0) {
+                    System.out.println("\nNao ha Configuracao cadastrada!");
+                    break;
+                }
+
                 String matricula = "";
                 String codigoEx = "";
 
@@ -50,6 +61,13 @@ public class MenuPrincipal {
                 break;
 
             case 3: // Cadastrar devolucao
+                if (l.getArrayLocatarios().isEmpty()) {
+                    System.out.println("\nNao ha Locatarios cadastrados!");
+                    break;
+                } else if (l.getArrayExemplares().isEmpty()) {
+                    System.out.println("\nNao ha Exemplares cadastrados!");
+                    break;
+                }
                 matricula = "";
                 codigoEx = "";
 
@@ -72,11 +90,13 @@ public class MenuPrincipal {
                 SubMenuPesquisar.menuPesquisar(l);
                 break;
             case 6:
+                if (l.config.getMulta() == 0) {
+                    System.out.println("\nNao ha configuracao cadastrada!\n");
+                }
                 SubMenuConfiguracao.menuConfiguracao(l);
                 // Alterar Configuracao
                 break;
             case 0: // Sair
-                in.close();
                 break;
             default:
                 System.out.println("Opção Inválida!");
