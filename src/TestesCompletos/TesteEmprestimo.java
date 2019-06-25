@@ -15,7 +15,7 @@ public class TestesEmprestimo{
         Locatario l = new Locatario("123","Pedro","aluno","123456");
         Exemplar e = new Exemplar("13",30,"Algoritmos","Cormen");
         a.realizarEmprestimo(l.getMatricula(),e.getCodigo());
-        assertThat(l,equalTo(a.getArrayEmprestimos.get(0).getLocatario()));
-        assertThat(e,equalTo(a.getArrayEmprestimos.get(0).getExemplar()));
+        assertThat(l,equalTo(a.getArrayEmprestimos().get(0).getLocatario()));
+        assertThat(e,equalTo(a.getArrayEmprestimos().get(0).getExemplar()));
  }
 }
