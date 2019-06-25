@@ -374,12 +374,6 @@ public class Locadora {
         Scanner in = new Scanner(System.in);
         int op = 0;
 
-        if (this.emprestimos.isEmpty()) {
-            System.out.println("\nNao ha emprestimos com atraso para exibir.\n");
-            in.close();
-            return;
-        }
-
         System.out.println("-> Relatorio de emprestimos atrasados geral ou por Locatario? <1 ou 2> ");
         do {
             op = in.nextInt();
