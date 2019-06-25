@@ -4,8 +4,6 @@ import org.junit.Test;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertEquals;
 
-import functions.*;
-
 public class TesteLocatario {
 
     @Test
