@@ -205,10 +205,9 @@ public class Locadora {
         }
 
         String categoria = l.getCategoria();
-        double multa = this.calculaMulta(dia_atual, dataEmp, categoria);
 
-        if (multa > 0) {
-            emprestimo.setIsAtrasado(true);
+        if (this.verificarAtraso(emprestimo)) {
+            double multa = this.calculaMulta(dia_atual, dataEmp, categoria);
             System.out.println("\n\nDevolução realizada com multa no valor de R$ " + multa + ".\n");
         } else {
             System.out.println("\n\nDevolução realizada sem multa.\n");
@@ -266,6 +265,18 @@ public class Locadora {
 
         Emprestimo emp = new Emprestimo(e, l, dtEmprestimo, devolucao);
         this.emprestimos.add(emp);
+    }
+
+    public boolean verificarAtraso(Emprestimo e) {
+        Date hj = new Date();
+
+        if (hj.compareTo(new Date(e.getDataDevol())) > 0) { // Se a data atual for maior que a data de devolucao do
+                                                            // emprestimo.
+            System.out.println("\nHj: " + hj + "\nDt Devolucao: " + new Date(e.getDataDevol()) + "\n");
+            e.setIsAtrasado(true);
+            return true;
+        }
+        return false;
     }
 
     // Relatorios
@@ -388,10 +399,12 @@ public class Locadora {
             System.out.println("\n----------> Relatorio de todos os emprestimos atrasados <-------------\n");
 
             for (Emprestimo e : arrayEmprestimosAtrasados) {
-                if (e.isAtrasado()) {
+                if (this.verificarAtraso(e)) {
                     System.out.println("Nome do locatario: " + e.getLocatario().getNome() + "\nLivro alugado: "
                             + e.getExemplar().getTitulo() + "\nData do emprestimo: " + e.getDataEmp()
-                            + "\nData da devolucao: " + e.getDataDevol() + "\nMulta: R$ " + "\n\n");
+                            + "\nData da devolucao: " + e.getDataDevol() + "\nMulta: R$ "
+                            + this.calculaMulta(new Date().getTime(), e.getDataEmp(), e.getLocatario().getCategoria())
+                            + "\n\n");
                 }
             }
         } else if (op == 2) {
@@ -409,9 +422,11 @@ public class Locadora {
             }
 
             for (Emprestimo e : arrayEmprestimosAtrasados) {
-                if (e.getLocatario().getMatricula().equals(l.getMatricula()) && e.isAtrasado()) {
+                if (e.getLocatario().getMatricula().equals(l.getMatricula()) && this.verificarAtraso(e)) {
                     System.out.println("\nLivro alugado: " + e.getExemplar().getTitulo() + "\nData do emprestimo: "
-                            + e.getDataEmp() + "\nData da devolucao: " + e.getDataDevol() + "\nMulta: R$ " + "\n\n");
+                            + e.getDataEmp() + "\nData da devolucao: " + e.getDataDevol() + "\nMulta: R$ "
+                            + this.calculaMulta(new Date().getTime(), e.getDataEmp(), e.getLocatario().getCategoria())
+                            + "\n\n");
                 }
             }
         }
